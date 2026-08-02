@@ -3,7 +3,7 @@ import { articleController } from "../controllers/article.controller.js";
 
 const articleRouter = express.Router();
 
-//READ 
+//READ
 articleRouter.get(
   "/",
   (req, res, next) => {
@@ -32,7 +32,13 @@ articleRouter.get(
   articleController.findAll,
 );
 
-//CREATE 
-articleRouter.post("/", articleController.create)
+//CREATE
+articleRouter.post("/", articleController.create);
+
+//UPDATE
+articleRouter.put("/:articleID", articleController.update);
+
+//DELETE
+articleRouter.delete("/:articleID", articleController.delete);
 
 export default articleRouter;

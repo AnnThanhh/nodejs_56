@@ -15,13 +15,25 @@ export const articleController = {
     res.status(response.statusCode).json(response);
   },
 
-  create(req, res) {
-    const result = articleService.create(req);
+  async create(req, res) {
+    const result = await articleService.create(req);
     const response = responseSuccess(
       "Tạo bài viết thành công",
       result,
       statusCodes.CREATED,
     );
+    res.status(response.statusCode).json(response);
+  },
+
+  async update(req, res) {
+    const result = await articleService.update(req);
+    const response = responseSuccess("Cập nhật bài viết thành công", result);
+    res.status(response.statusCode).json(response);
+  },
+
+  async delete(req, res) {
+    const result = await articleService.delete(req);
+    const response = responseSuccess("Xóa bài viết thành công", result);
     res.status(response.statusCode).json(response);
   },
 };
