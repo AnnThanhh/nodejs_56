@@ -3,7 +3,7 @@ import Article from "../models/article.model.js";
 
 export const articleService = {
   async findAll(req, res) {
-    console.log("server", req.info)
+    console.log("service", req.info);
     //xử lý nghiệp vụ.....
     // sequelize
     // return "list article";
@@ -11,5 +11,11 @@ export const articleService = {
 
     const resultPrisma = await prisma.articles.findMany();
     return resultPrisma;
+  },
+
+  create(req) {
+    console.log(req);
+
+    return "Tạo bài viết thành công";
   },
 };

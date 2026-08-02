@@ -3,6 +3,7 @@ import { articleController } from "../controllers/article.controller.js";
 
 const articleRouter = express.Router();
 
+//READ 
 articleRouter.get(
   "/",
   (req, res, next) => {
@@ -22,13 +23,16 @@ articleRouter.get(
     console.log(req.info);
     next();
   },
-  (err, req, res, next) => {
+  (req, res, next) => {
     console.log("mid3");
     console.log(req.info);
+    // throw new Error("Lỗi ở mid3");
     next();
   },
   articleController.findAll,
 );
 
-//
+//CREATE 
+articleRouter.post("/", articleController.create)
+
 export default articleRouter;
