@@ -1,8 +1,8 @@
 import { statusCodes } from "./statusCode.helper.js";
 
 export const responseSuccess = (
-  message = "Lấy danh sách thành công",
   result,
+  message = "Lấy danh sách thành công",
   statusCode = statusCodes.OK,
 ) => {
   return {

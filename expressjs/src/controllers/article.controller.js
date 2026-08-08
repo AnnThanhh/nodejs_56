@@ -4,13 +4,12 @@ import { articleService } from "../services/article.service.js";
 
 export const articleController = {
   async findAll(req, res) {
-    console.log(req.info);
     //điều hướng về service để xử lý nghiệp vụ
     const result = await articleService.findAll(req, res);
     //trả dữ liệu về client
     const response = responseSuccess(
-      "Lấy danh sách bài viết thành công",
       result,
+      "Lấy danh sách bài viết thành công",
     );
     res.status(response.statusCode).json(response);
   },
@@ -18,8 +17,8 @@ export const articleController = {
   async create(req, res) {
     const result = await articleService.create(req);
     const response = responseSuccess(
-      "Tạo bài viết thành công",
       result,
+      "Tạo bài viết thành công",
       statusCodes.CREATED,
     );
     res.status(response.statusCode).json(response);
@@ -27,13 +26,13 @@ export const articleController = {
 
   async update(req, res) {
     const result = await articleService.update(req);
-    const response = responseSuccess("Cập nhật bài viết thành công", result);
+    const response = responseSuccess(result, "Cập nhật bài viết thành công");
     res.status(response.statusCode).json(response);
   },
 
   async delete(req, res) {
     const result = await articleService.delete(req);
-    const response = responseSuccess("Xóa bài viết thành công", result);
+    const response = responseSuccess(result, "Xóa bài viết thành công");
     res.status(response.statusCode).json(response);
   },
 };

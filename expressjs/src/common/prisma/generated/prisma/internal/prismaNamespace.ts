@@ -994,7 +994,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const ArticlesScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  Content: 'Content',
+  content: 'content',
   imageURL: 'imageURL',
   views: 'views',
   userId: 'userId',
@@ -1108,7 +1108,8 @@ export const UsersScalarFieldEnum = {
   isDeleted: 'isDeleted',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  password: 'password'
 } as const
 
 export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
@@ -1132,7 +1133,7 @@ export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 export const ArticlesOrderByRelevanceFieldEnum = {
   title: 'title',
-  Content: 'Content',
+  content: 'content',
   imageURL: 'imageURL'
 } as const
 
@@ -1175,7 +1176,8 @@ export const UsersOrderByRelevanceFieldEnum = {
   fullName: 'fullName',
   avartar: 'avartar',
   totpSecret: 'totpSecret',
-  googleId: 'googleId'
+  googleId: 'googleId',
+  password: 'password'
 } as const
 
 export type UsersOrderByRelevanceFieldEnum = (typeof UsersOrderByRelevanceFieldEnum)[keyof typeof UsersOrderByRelevanceFieldEnum]

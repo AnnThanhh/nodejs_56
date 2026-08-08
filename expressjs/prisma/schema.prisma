@@ -11,7 +11,7 @@ datasource db {
 model Articles {
   id        Int       @id @default(autoincrement())
   title     String?   @db.VarChar(255)
-  Content   String?   @db.Text
+  content   String?   @db.Text
   imageURL  String?   @db.VarChar(255)
   views     Int       @default(0)
   userId    Int?
@@ -132,6 +132,7 @@ model Users {
   deletedAt                DateTime?                  @db.Timestamp(0)
   createdAt                DateTime                   @default(now()) @db.Timestamp(0)
   updatedAt                DateTime                   @default(now()) @db.Timestamp(0)
+  password                 String?                    @db.VarChar(255)
   Articles                 Articles[]
   Articles_demo_code_first Articles_demo_code_first[]
   ChatGroupMembers         ChatGroupMembers[]

@@ -1,7 +1,20 @@
 import express from "express";
 import rootRouter from "./src/routers/root.router.js";
 import { appError } from "./src/common/helpers/appErrror.helper.js";
+import cors from "cors";
 const app = express();
+
+// app.use((req, res, next) => {
+//   res.setHeader(
+//     "access-control-allow-methods",
+//     "GET, POST, PUT, DELETE, PATCH",
+//   );
+//   (res.setHeader("access-control-allow-headers", "content-type"),
+//     res.setHeader("access-control-allow-origin", "http://localhost:3000"));
+
+//   next();
+// });
+app.use(cors({ origin: "http://localhost:3000" })); //middleware để cho phép FE gửi request lên server
 
 app.use(express.json()); //middleware để parse dữ liệu json từ client gửi lên server
 

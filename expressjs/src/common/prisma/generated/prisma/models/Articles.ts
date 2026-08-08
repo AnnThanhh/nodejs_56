@@ -43,7 +43,7 @@ export type ArticlesSumAggregateOutputType = {
 export type ArticlesMinAggregateOutputType = {
   id: number | null
   title: string | null
-  Content: string | null
+  content: string | null
   imageURL: string | null
   views: number | null
   userId: number | null
@@ -57,7 +57,7 @@ export type ArticlesMinAggregateOutputType = {
 export type ArticlesMaxAggregateOutputType = {
   id: number | null
   title: string | null
-  Content: string | null
+  content: string | null
   imageURL: string | null
   views: number | null
   userId: number | null
@@ -71,7 +71,7 @@ export type ArticlesMaxAggregateOutputType = {
 export type ArticlesCountAggregateOutputType = {
   id: number
   title: number
-  Content: number
+  content: number
   imageURL: number
   views: number
   userId: number
@@ -101,7 +101,7 @@ export type ArticlesSumAggregateInputType = {
 export type ArticlesMinAggregateInputType = {
   id?: true
   title?: true
-  Content?: true
+  content?: true
   imageURL?: true
   views?: true
   userId?: true
@@ -115,7 +115,7 @@ export type ArticlesMinAggregateInputType = {
 export type ArticlesMaxAggregateInputType = {
   id?: true
   title?: true
-  Content?: true
+  content?: true
   imageURL?: true
   views?: true
   userId?: true
@@ -129,7 +129,7 @@ export type ArticlesMaxAggregateInputType = {
 export type ArticlesCountAggregateInputType = {
   id?: true
   title?: true
-  Content?: true
+  content?: true
   imageURL?: true
   views?: true
   userId?: true
@@ -230,7 +230,7 @@ export type ArticlesGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type ArticlesGroupByOutputType = {
   id: number
   title: string | null
-  Content: string | null
+  content: string | null
   imageURL: string | null
   views: number
   userId: number | null
@@ -267,7 +267,7 @@ export type ArticlesWhereInput = {
   NOT?: Prisma.ArticlesWhereInput | Prisma.ArticlesWhereInput[]
   id?: Prisma.IntFilter<"Articles"> | number
   title?: Prisma.StringNullableFilter<"Articles"> | string | null
-  Content?: Prisma.StringNullableFilter<"Articles"> | string | null
+  content?: Prisma.StringNullableFilter<"Articles"> | string | null
   imageURL?: Prisma.StringNullableFilter<"Articles"> | string | null
   views?: Prisma.IntFilter<"Articles"> | number
   userId?: Prisma.IntNullableFilter<"Articles"> | number | null
@@ -282,7 +282,7 @@ export type ArticlesWhereInput = {
 export type ArticlesOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrderInput | Prisma.SortOrder
-  Content?: Prisma.SortOrderInput | Prisma.SortOrder
+  content?: Prisma.SortOrderInput | Prisma.SortOrder
   imageURL?: Prisma.SortOrderInput | Prisma.SortOrder
   views?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -301,7 +301,7 @@ export type ArticlesWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ArticlesWhereInput[]
   NOT?: Prisma.ArticlesWhereInput | Prisma.ArticlesWhereInput[]
   title?: Prisma.StringNullableFilter<"Articles"> | string | null
-  Content?: Prisma.StringNullableFilter<"Articles"> | string | null
+  content?: Prisma.StringNullableFilter<"Articles"> | string | null
   imageURL?: Prisma.StringNullableFilter<"Articles"> | string | null
   views?: Prisma.IntFilter<"Articles"> | number
   userId?: Prisma.IntNullableFilter<"Articles"> | number | null
@@ -316,7 +316,7 @@ export type ArticlesWhereUniqueInput = Prisma.AtLeast<{
 export type ArticlesOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrderInput | Prisma.SortOrder
-  Content?: Prisma.SortOrderInput | Prisma.SortOrder
+  content?: Prisma.SortOrderInput | Prisma.SortOrder
   imageURL?: Prisma.SortOrderInput | Prisma.SortOrder
   views?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -338,7 +338,7 @@ export type ArticlesScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ArticlesScalarWhereWithAggregatesInput | Prisma.ArticlesScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Articles"> | number
   title?: Prisma.StringNullableWithAggregatesFilter<"Articles"> | string | null
-  Content?: Prisma.StringNullableWithAggregatesFilter<"Articles"> | string | null
+  content?: Prisma.StringNullableWithAggregatesFilter<"Articles"> | string | null
   imageURL?: Prisma.StringNullableWithAggregatesFilter<"Articles"> | string | null
   views?: Prisma.IntWithAggregatesFilter<"Articles"> | number
   userId?: Prisma.IntNullableWithAggregatesFilter<"Articles"> | number | null
@@ -351,7 +351,7 @@ export type ArticlesScalarWhereWithAggregatesInput = {
 
 export type ArticlesCreateInput = {
   title?: string | null
-  Content?: string | null
+  content?: string | null
   imageURL?: string | null
   views?: number
   deletedBy?: number
@@ -365,7 +365,7 @@ export type ArticlesCreateInput = {
 export type ArticlesUncheckedCreateInput = {
   id?: number
   title?: string | null
-  Content?: string | null
+  content?: string | null
   imageURL?: string | null
   views?: number
   userId?: number | null
@@ -378,7 +378,7 @@ export type ArticlesUncheckedCreateInput = {
 
 export type ArticlesUpdateInput = {
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageURL?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   deletedBy?: Prisma.IntFieldUpdateOperationsInput | number
@@ -392,7 +392,7 @@ export type ArticlesUpdateInput = {
 export type ArticlesUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageURL?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -406,7 +406,7 @@ export type ArticlesUncheckedUpdateInput = {
 export type ArticlesCreateManyInput = {
   id?: number
   title?: string | null
-  Content?: string | null
+  content?: string | null
   imageURL?: string | null
   views?: number
   userId?: number | null
@@ -419,7 +419,7 @@ export type ArticlesCreateManyInput = {
 
 export type ArticlesUpdateManyMutationInput = {
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageURL?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   deletedBy?: Prisma.IntFieldUpdateOperationsInput | number
@@ -432,7 +432,7 @@ export type ArticlesUpdateManyMutationInput = {
 export type ArticlesUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageURL?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -452,7 +452,7 @@ export type ArticlesOrderByRelevanceInput = {
 export type ArticlesCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  Content?: Prisma.SortOrder
+  content?: Prisma.SortOrder
   imageURL?: Prisma.SortOrder
   views?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -473,7 +473,7 @@ export type ArticlesAvgOrderByAggregateInput = {
 export type ArticlesMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  Content?: Prisma.SortOrder
+  content?: Prisma.SortOrder
   imageURL?: Prisma.SortOrder
   views?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -487,7 +487,7 @@ export type ArticlesMaxOrderByAggregateInput = {
 export type ArticlesMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  Content?: Prisma.SortOrder
+  content?: Prisma.SortOrder
   imageURL?: Prisma.SortOrder
   views?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -591,7 +591,7 @@ export type ArticlesUncheckedUpdateManyWithoutUsersNestedInput = {
 
 export type ArticlesCreateWithoutUsersInput = {
   title?: string | null
-  Content?: string | null
+  content?: string | null
   imageURL?: string | null
   views?: number
   deletedBy?: number
@@ -604,7 +604,7 @@ export type ArticlesCreateWithoutUsersInput = {
 export type ArticlesUncheckedCreateWithoutUsersInput = {
   id?: number
   title?: string | null
-  Content?: string | null
+  content?: string | null
   imageURL?: string | null
   views?: number
   deletedBy?: number
@@ -646,7 +646,7 @@ export type ArticlesScalarWhereInput = {
   NOT?: Prisma.ArticlesScalarWhereInput | Prisma.ArticlesScalarWhereInput[]
   id?: Prisma.IntFilter<"Articles"> | number
   title?: Prisma.StringNullableFilter<"Articles"> | string | null
-  Content?: Prisma.StringNullableFilter<"Articles"> | string | null
+  content?: Prisma.StringNullableFilter<"Articles"> | string | null
   imageURL?: Prisma.StringNullableFilter<"Articles"> | string | null
   views?: Prisma.IntFilter<"Articles"> | number
   userId?: Prisma.IntNullableFilter<"Articles"> | number | null
@@ -660,7 +660,7 @@ export type ArticlesScalarWhereInput = {
 export type ArticlesCreateManyUsersInput = {
   id?: number
   title?: string | null
-  Content?: string | null
+  content?: string | null
   imageURL?: string | null
   views?: number
   deletedBy?: number
@@ -672,7 +672,7 @@ export type ArticlesCreateManyUsersInput = {
 
 export type ArticlesUpdateWithoutUsersInput = {
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageURL?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   deletedBy?: Prisma.IntFieldUpdateOperationsInput | number
@@ -685,7 +685,7 @@ export type ArticlesUpdateWithoutUsersInput = {
 export type ArticlesUncheckedUpdateWithoutUsersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageURL?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   deletedBy?: Prisma.IntFieldUpdateOperationsInput | number
@@ -698,7 +698,7 @@ export type ArticlesUncheckedUpdateWithoutUsersInput = {
 export type ArticlesUncheckedUpdateManyWithoutUsersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  Content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageURL?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   deletedBy?: Prisma.IntFieldUpdateOperationsInput | number
@@ -713,7 +713,7 @@ export type ArticlesUncheckedUpdateManyWithoutUsersInput = {
 export type ArticlesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
-  Content?: boolean
+  content?: boolean
   imageURL?: boolean
   views?: boolean
   userId?: boolean
@@ -730,7 +730,7 @@ export type ArticlesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type ArticlesSelectScalar = {
   id?: boolean
   title?: boolean
-  Content?: boolean
+  content?: boolean
   imageURL?: boolean
   views?: boolean
   userId?: boolean
@@ -741,7 +741,7 @@ export type ArticlesSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ArticlesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "Content" | "imageURL" | "views" | "userId" | "deletedBy" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["articles"]>
+export type ArticlesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "content" | "imageURL" | "views" | "userId" | "deletedBy" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["articles"]>
 export type ArticlesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Users?: boolean | Prisma.Articles$UsersArgs<ExtArgs>
 }
@@ -754,7 +754,7 @@ export type $ArticlesPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     title: string | null
-    Content: string | null
+    content: string | null
     imageURL: string | null
     views: number
     userId: number | null
@@ -1135,7 +1135,7 @@ export interface Prisma__ArticlesClient<T, Null = never, ExtArgs extends runtime
 export interface ArticlesFieldRefs {
   readonly id: Prisma.FieldRef<"Articles", 'Int'>
   readonly title: Prisma.FieldRef<"Articles", 'String'>
-  readonly Content: Prisma.FieldRef<"Articles", 'String'>
+  readonly content: Prisma.FieldRef<"Articles", 'String'>
   readonly imageURL: Prisma.FieldRef<"Articles", 'String'>
   readonly views: Prisma.FieldRef<"Articles", 'Int'>
   readonly userId: Prisma.FieldRef<"Articles", 'Int'>

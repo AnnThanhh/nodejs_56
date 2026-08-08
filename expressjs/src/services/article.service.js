@@ -1,5 +1,7 @@
+import { where } from "sequelize";
 import { prisma } from "../common/prisma/connect.prisma.js";
 import Article from "../models/article.model.js";
+import { buildQueryPrisma } from "../common/helpers/build-query-prisma.helper.js";
 
 //4 nơi nhận dữ liệu từ FE: body, header, query, params
 
@@ -9,36 +11,16 @@ export const articleService = {
     // sequelize
     // return "list article";
     // const resultSequelize = await Article.findAll(); // select id, title from Article -> index
-    let { page, pageSize } = req.query;
-    const pageDefault = 1;
-    const pageSizeDefault = 3;
-
-    //chuyển đổi thành số
-    page = Number(page);
-    pageSize = Number(pageSize);
-
-    //nếu gửi chữ
-    page = Number(page) || pageDefault;
-    pageSize = Number(pageSize) || pageSizeDefault;
-
-    //nếu số âm
-    if (page < 1) page = pageDefault;
-    if (pageSize < 1) pageSize = pageSizeDefault;
-
-    const index = (page - 1) * pageSize;
-
+    const { where, page, pageSize, index } = buildQueryPrisma(req);
+    
     const resultPrisma = await prisma.articles.findMany({
-      where: {
-        isDeleted: false,
-      },
+      where: where,
       skip: index, //Offset
       take: pageSize, //Limit
     });
 
     const totalItems = await prisma.articles.count({
-      where: {
-        isDeleted: false,
-      },
+      where: where,
     });
     const totalPages = Math.ceil(totalItems / pageSize);
 
