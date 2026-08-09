@@ -12,14 +12,21 @@ const adapter = new PrismaMariaDb({
   port: url.port,
 });
 
-const prisma = new PrismaClient({ adapter });
+const prisma = new PrismaClient({
+  adapter,
+  omit: {
+    users: {
+      password: true, // mặc định ẩn cột password
+    },
+  },
+});
 
 //kiểm tra kết nối
 try {
   await prisma.$queryRaw`SELECT 1 + 1 AS result`;
-  console.log('✅ [PRISMA] Connection has been established successfully.');
+  console.log("✅ [PRISMA] Connection has been established successfully.");
 } catch (error) {
-  console.error('❌ [PRISMA] Unable to connect to the database:', error);
+  console.error("❌ [PRISMA] Unable to connect to the database:", error);
 }
 
 export { prisma };
