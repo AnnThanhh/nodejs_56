@@ -184,3 +184,7 @@ VALUES
 'https://picsum.photos/500/300?6',
 670,
 2);
+
+---Add column password to Users table
+ALTER TABLE `Users`
+ADD COLUMN `password` VARCHAR(255)
