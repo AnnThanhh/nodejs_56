@@ -4,6 +4,8 @@ import { appError } from "./src/common/helpers/appErrror.helper.js";
 import { logAPI } from "./src/common/middlewares/log-api.middleware.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { appLimit } from "./src/common/middlewares/rateLimit.middleware.js";
+import { initLoginGooglePassport } from "./src/common/passport/login-google.passport.js";
 const app = express();
 
 // app.use((req, res, next) => {
@@ -24,9 +26,11 @@ app.use(cookieParser()); //middleware để parse cookie từ client gửi lên 
 
 app.use(logAPI()); //middleware để log thông tin request từ client gửi lên server
 
+initLoginGooglePassport(); //khởi tạo passport login google
+
 // console.log("đây là app", app)
 //url: localhost:3069/api/article
-app.use("/api", rootRouter);
+app.use("/api", appLimit, rootRouter);
 app.use(appError);
 
 const PORT = 3069;

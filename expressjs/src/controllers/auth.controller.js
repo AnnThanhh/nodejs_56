@@ -10,24 +10,33 @@ export const authController = {
 
   async login(req, res, next) {
     const result = await authService.login(req);
-    // const response = responseSuccess(result, `Login successfully`);
+    const response = responseSuccess(true, `Login successfully`);
 
-    // res.cookie("accessToken", result.accessToken);
-    // res.cookie("refreshToken", result.refreshToken);
+    res.cookie("accessToken", result.accessToken);
+    res.cookie("refreshToken", result.refreshToken);
 
-    const responsev2 = responseSuccess(
-      result.accessToken,
-      `Login successfully`,
-    );
+    // const responsev2 = responseSuccess(
+    //   result.accessToken,
+    //   `Login successfully`,
+    // );
 
-    // res.status(response.statusCode).json(response);
-    res.status(responsev2.statusCode).json(responsev2);
+    res.status(response.statusCode).json(response);
+    // res.status(responsev2.statusCode).json(responsev2);
   },
 
   async getInfo(req, res, next) {
     const result = await authService.getInfo(req);
 
     const response = responseSuccess(result, `Get info successfully`);
+    res.status(response.statusCode).json(response);
+  },
+
+  async refreshToken(req, res, next) {
+    const result = await authService.refreshToken(req);
+    const response = responseSuccess(true, `Refresh token successfully`);
+    res.cookie("accessToken", result.accessToken);
+    res.cookie("refreshToken", result.refreshToken);
+    
     res.status(response.statusCode).json(response);
   },
 };
