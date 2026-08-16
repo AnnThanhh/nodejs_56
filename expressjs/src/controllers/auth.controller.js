@@ -36,7 +36,15 @@ export const authController = {
     const response = responseSuccess(true, `Refresh token successfully`);
     res.cookie("accessToken", result.accessToken);
     res.cookie("refreshToken", result.refreshToken);
-    
+
     res.status(response.statusCode).json(response);
+  },
+
+  async googleCallback(req, res, next) {
+    console.log(req.user);
+    res.cookie("accessToken", req.user.accessToken);
+    res.cookie("refreshToken", req.user.refreshToken);
+
+    res.redirect("http://localhost:3000/login-callback");
   },
 };

@@ -12,7 +12,7 @@ model Articles {
   id        Int       @id @default(autoincrement())
   title     String?   @db.VarChar(255)
   content   String?   @db.Text
-  imageURL  String?   @db.VarChar(255)
+  imageUrl  String?   @db.VarChar(255)
   views     Int       @default(0)
   userId    Int?
   deletedBy Int       @default(0)
@@ -123,7 +123,7 @@ model Users {
   id                       Int                        @id @default(autoincrement())
   email                    String                     @unique(map: "email") @db.VarChar(255)
   fullName                 String?                    @db.VarChar(255)
-  avartar                  String?                    @db.Text
+  avatar                   String?                    @db.Text
   age                      Int?
   totpSecret               String?                    @db.VarChar(255)
   googleId                 String?                    @db.VarChar(255)

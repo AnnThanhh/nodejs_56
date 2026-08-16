@@ -42,7 +42,7 @@ export type UsersMinAggregateOutputType = {
   id: number | null
   email: string | null
   fullName: string | null
-  avartar: string | null
+  avatar: string | null
   age: number | null
   totpSecret: string | null
   googleId: string | null
@@ -58,7 +58,7 @@ export type UsersMaxAggregateOutputType = {
   id: number | null
   email: string | null
   fullName: string | null
-  avartar: string | null
+  avatar: string | null
   age: number | null
   totpSecret: string | null
   googleId: string | null
@@ -74,7 +74,7 @@ export type UsersCountAggregateOutputType = {
   id: number
   email: number
   fullName: number
-  avartar: number
+  avatar: number
   age: number
   totpSecret: number
   googleId: number
@@ -104,7 +104,7 @@ export type UsersMinAggregateInputType = {
   id?: true
   email?: true
   fullName?: true
-  avartar?: true
+  avatar?: true
   age?: true
   totpSecret?: true
   googleId?: true
@@ -120,7 +120,7 @@ export type UsersMaxAggregateInputType = {
   id?: true
   email?: true
   fullName?: true
-  avartar?: true
+  avatar?: true
   age?: true
   totpSecret?: true
   googleId?: true
@@ -136,7 +136,7 @@ export type UsersCountAggregateInputType = {
   id?: true
   email?: true
   fullName?: true
-  avartar?: true
+  avatar?: true
   age?: true
   totpSecret?: true
   googleId?: true
@@ -239,7 +239,7 @@ export type UsersGroupByOutputType = {
   id: number
   email: string
   fullName: string | null
-  avartar: string | null
+  avatar: string | null
   age: number | null
   totpSecret: string | null
   googleId: string | null
@@ -278,7 +278,7 @@ export type UsersWhereInput = {
   id?: Prisma.IntFilter<"Users"> | number
   email?: Prisma.StringFilter<"Users"> | string
   fullName?: Prisma.StringNullableFilter<"Users"> | string | null
-  avartar?: Prisma.StringNullableFilter<"Users"> | string | null
+  avatar?: Prisma.StringNullableFilter<"Users"> | string | null
   age?: Prisma.IntNullableFilter<"Users"> | number | null
   totpSecret?: Prisma.StringNullableFilter<"Users"> | string | null
   googleId?: Prisma.StringNullableFilter<"Users"> | string | null
@@ -300,7 +300,7 @@ export type UsersOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   fullName?: Prisma.SortOrderInput | Prisma.SortOrder
-  avartar?: Prisma.SortOrderInput | Prisma.SortOrder
+  avatar?: Prisma.SortOrderInput | Prisma.SortOrder
   age?: Prisma.SortOrderInput | Prisma.SortOrder
   totpSecret?: Prisma.SortOrderInput | Prisma.SortOrder
   googleId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -326,7 +326,7 @@ export type UsersWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UsersWhereInput[]
   NOT?: Prisma.UsersWhereInput | Prisma.UsersWhereInput[]
   fullName?: Prisma.StringNullableFilter<"Users"> | string | null
-  avartar?: Prisma.StringNullableFilter<"Users"> | string | null
+  avatar?: Prisma.StringNullableFilter<"Users"> | string | null
   age?: Prisma.IntNullableFilter<"Users"> | number | null
   totpSecret?: Prisma.StringNullableFilter<"Users"> | string | null
   googleId?: Prisma.StringNullableFilter<"Users"> | string | null
@@ -348,7 +348,7 @@ export type UsersOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   fullName?: Prisma.SortOrderInput | Prisma.SortOrder
-  avartar?: Prisma.SortOrderInput | Prisma.SortOrder
+  avatar?: Prisma.SortOrderInput | Prisma.SortOrder
   age?: Prisma.SortOrderInput | Prisma.SortOrder
   totpSecret?: Prisma.SortOrderInput | Prisma.SortOrder
   googleId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -372,7 +372,7 @@ export type UsersScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Users"> | number
   email?: Prisma.StringWithAggregatesFilter<"Users"> | string
   fullName?: Prisma.StringNullableWithAggregatesFilter<"Users"> | string | null
-  avartar?: Prisma.StringNullableWithAggregatesFilter<"Users"> | string | null
+  avatar?: Prisma.StringNullableWithAggregatesFilter<"Users"> | string | null
   age?: Prisma.IntNullableWithAggregatesFilter<"Users"> | number | null
   totpSecret?: Prisma.StringNullableWithAggregatesFilter<"Users"> | string | null
   googleId?: Prisma.StringNullableWithAggregatesFilter<"Users"> | string | null
@@ -387,7 +387,7 @@ export type UsersScalarWhereWithAggregatesInput = {
 export type UsersCreateInput = {
   email: string
   fullName?: string | null
-  avartar?: string | null
+  avatar?: string | null
   age?: number | null
   totpSecret?: string | null
   googleId?: string | null
@@ -409,7 +409,7 @@ export type UsersUncheckedCreateInput = {
   id?: number
   email: string
   fullName?: string | null
-  avartar?: string | null
+  avatar?: string | null
   age?: number | null
   totpSecret?: string | null
   googleId?: string | null
@@ -430,7 +430,7 @@ export type UsersUncheckedCreateInput = {
 export type UsersUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avartar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -452,7 +452,7 @@ export type UsersUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avartar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -474,7 +474,7 @@ export type UsersCreateManyInput = {
   id?: number
   email: string
   fullName?: string | null
-  avartar?: string | null
+  avatar?: string | null
   age?: number | null
   totpSecret?: string | null
   googleId?: string | null
@@ -489,7 +489,7 @@ export type UsersCreateManyInput = {
 export type UsersUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avartar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -505,7 +505,7 @@ export type UsersUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avartar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -537,7 +537,7 @@ export type UsersCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
-  avartar?: Prisma.SortOrder
+  avatar?: Prisma.SortOrder
   age?: Prisma.SortOrder
   totpSecret?: Prisma.SortOrder
   googleId?: Prisma.SortOrder
@@ -559,7 +559,7 @@ export type UsersMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
-  avartar?: Prisma.SortOrder
+  avatar?: Prisma.SortOrder
   age?: Prisma.SortOrder
   totpSecret?: Prisma.SortOrder
   googleId?: Prisma.SortOrder
@@ -575,7 +575,7 @@ export type UsersMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
-  avartar?: Prisma.SortOrder
+  avatar?: Prisma.SortOrder
   age?: Prisma.SortOrder
   totpSecret?: Prisma.SortOrder
   googleId?: Prisma.SortOrder
@@ -690,7 +690,7 @@ export type UsersUpdateOneWithoutOrdersNestedInput = {
 export type UsersCreateWithoutArticlesInput = {
   email: string
   fullName?: string | null
-  avartar?: string | null
+  avatar?: string | null
   age?: number | null
   totpSecret?: string | null
   googleId?: string | null
@@ -711,7 +711,7 @@ export type UsersUncheckedCreateWithoutArticlesInput = {
   id?: number
   email: string
   fullName?: string | null
-  avartar?: string | null
+  avatar?: string | null
   age?: number | null
   totpSecret?: string | null
   googleId?: string | null
@@ -747,7 +747,7 @@ export type UsersUpdateToOneWithWhereWithoutArticlesInput = {
 export type UsersUpdateWithoutArticlesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avartar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -768,7 +768,7 @@ export type UsersUncheckedUpdateWithoutArticlesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avartar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -788,7 +788,7 @@ export type UsersUncheckedUpdateWithoutArticlesInput = {
 export type UsersCreateWithoutArticles_demo_code_firstInput = {
   email: string
   fullName?: string | null
-  avartar?: string | null
+  avatar?: string | null
   age?: number | null
   totpSecret?: string | null
   googleId?: string | null
@@ -809,7 +809,7 @@ export type UsersUncheckedCreateWithoutArticles_demo_code_firstInput = {
   id?: number
   email: string
   fullName?: string | null
-  avartar?: string | null
+  avatar?: string | null
   age?: number | null
   totpSecret?: string | null
   googleId?: string | null
@@ -845,7 +845,7 @@ export type UsersUpdateToOneWithWhereWithoutArticles_demo_code_firstInput = {
 export type UsersUpdateWithoutArticles_demo_code_firstInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avartar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -866,7 +866,7 @@ export type UsersUncheckedUpdateWithoutArticles_demo_code_firstInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avartar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -886,7 +886,7 @@ export type UsersUncheckedUpdateWithoutArticles_demo_code_firstInput = {
 export type UsersCreateWithoutChatGroupMembersInput = {
   email: string
   fullName?: string | null
-  avartar?: string | null
+  avatar?: string | null
   age?: number | null
   totpSecret?: string | null
   googleId?: string | null
@@ -907,7 +907,7 @@ export type UsersUncheckedCreateWithoutChatGroupMembersInput = {
   id?: number
   email: string
   fullName?: string | null
-  avartar?: string | null
+  avatar?: string | null
   age?: number | null
   totpSecret?: string | null
   googleId?: string | null
@@ -943,7 +943,7 @@ export type UsersUpdateToOneWithWhereWithoutChatGroupMembersInput = {
 export type UsersUpdateWithoutChatGroupMembersInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avartar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -964,7 +964,7 @@ export type UsersUncheckedUpdateWithoutChatGroupMembersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avartar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -984,7 +984,7 @@ export type UsersUncheckedUpdateWithoutChatGroupMembersInput = {
 export type UsersCreateWithoutChatGroupsInput = {
   email: string
   fullName?: string | null
-  avartar?: string | null
+  avatar?: string | null
   age?: number | null
   totpSecret?: string | null
   googleId?: string | null
@@ -1005,7 +1005,7 @@ export type UsersUncheckedCreateWithoutChatGroupsInput = {
   id?: number
   email: string
   fullName?: string | null
-  avartar?: string | null
+  avatar?: string | null
   age?: number | null
   totpSecret?: string | null
   googleId?: string | null
@@ -1041,7 +1041,7 @@ export type UsersUpdateToOneWithWhereWithoutChatGroupsInput = {
 export type UsersUpdateWithoutChatGroupsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avartar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1062,7 +1062,7 @@ export type UsersUncheckedUpdateWithoutChatGroupsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avartar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1082,7 +1082,7 @@ export type UsersUncheckedUpdateWithoutChatGroupsInput = {
 export type UsersCreateWithoutChatMessagesInput = {
   email: string
   fullName?: string | null
-  avartar?: string | null
+  avatar?: string | null
   age?: number | null
   totpSecret?: string | null
   googleId?: string | null
@@ -1103,7 +1103,7 @@ export type UsersUncheckedCreateWithoutChatMessagesInput = {
   id?: number
   email: string
   fullName?: string | null
-  avartar?: string | null
+  avatar?: string | null
   age?: number | null
   totpSecret?: string | null
   googleId?: string | null
@@ -1139,7 +1139,7 @@ export type UsersUpdateToOneWithWhereWithoutChatMessagesInput = {
 export type UsersUpdateWithoutChatMessagesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avartar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1160,7 +1160,7 @@ export type UsersUncheckedUpdateWithoutChatMessagesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avartar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1180,7 +1180,7 @@ export type UsersUncheckedUpdateWithoutChatMessagesInput = {
 export type UsersCreateWithoutOrdersInput = {
   email: string
   fullName?: string | null
-  avartar?: string | null
+  avatar?: string | null
   age?: number | null
   totpSecret?: string | null
   googleId?: string | null
@@ -1201,7 +1201,7 @@ export type UsersUncheckedCreateWithoutOrdersInput = {
   id?: number
   email: string
   fullName?: string | null
-  avartar?: string | null
+  avatar?: string | null
   age?: number | null
   totpSecret?: string | null
   googleId?: string | null
@@ -1237,7 +1237,7 @@ export type UsersUpdateToOneWithWhereWithoutOrdersInput = {
 export type UsersUpdateWithoutOrdersInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avartar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1258,7 +1258,7 @@ export type UsersUncheckedUpdateWithoutOrdersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avartar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1355,7 +1355,7 @@ export type UsersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   id?: boolean
   email?: boolean
   fullName?: boolean
-  avartar?: boolean
+  avatar?: boolean
   age?: boolean
   totpSecret?: boolean
   googleId?: boolean
@@ -1380,7 +1380,7 @@ export type UsersSelectScalar = {
   id?: boolean
   email?: boolean
   fullName?: boolean
-  avartar?: boolean
+  avatar?: boolean
   age?: boolean
   totpSecret?: boolean
   googleId?: boolean
@@ -1392,7 +1392,7 @@ export type UsersSelectScalar = {
   password?: boolean
 }
 
-export type UsersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "fullName" | "avartar" | "age" | "totpSecret" | "googleId" | "deletedBy" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt" | "password", ExtArgs["result"]["users"]>
+export type UsersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "fullName" | "avatar" | "age" | "totpSecret" | "googleId" | "deletedBy" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt" | "password", ExtArgs["result"]["users"]>
 export type UsersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Articles?: boolean | Prisma.Users$ArticlesArgs<ExtArgs>
   Articles_demo_code_first?: boolean | Prisma.Users$Articles_demo_code_firstArgs<ExtArgs>
@@ -1417,7 +1417,7 @@ export type $UsersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     id: number
     email: string
     fullName: string | null
-    avartar: string | null
+    avatar: string | null
     age: number | null
     totpSecret: string | null
     googleId: string | null
@@ -1805,7 +1805,7 @@ export interface UsersFieldRefs {
   readonly id: Prisma.FieldRef<"Users", 'Int'>
   readonly email: Prisma.FieldRef<"Users", 'String'>
   readonly fullName: Prisma.FieldRef<"Users", 'String'>
-  readonly avartar: Prisma.FieldRef<"Users", 'String'>
+  readonly avatar: Prisma.FieldRef<"Users", 'String'>
   readonly age: Prisma.FieldRef<"Users", 'Int'>
   readonly totpSecret: Prisma.FieldRef<"Users", 'String'>
   readonly googleId: Prisma.FieldRef<"Users", 'String'>

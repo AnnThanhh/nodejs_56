@@ -13,11 +13,20 @@ authRouter.get("/get-info", protect, authController.getInfo);
 authRouter.post("/refresh-token", authController.refreshToken);
 // authRouter.get("/get-info", protectv2, authController.getInfo);
 
-//khi user click vào bnutton login google thì api get sẽ được gọi 
-//passport kích hoạt và redirect người tới trang chọn tài khoản google, đồng thời sẽ gửi scope mà mình đã yêu câu 
+//khi user click vào bnutton login google thì api get sẽ được gọi
+//passport kích hoạt và redirect người tới trang chọn tài khoản google, đồng thời sẽ gửi scope mà mình đã yêu câu
 authRouter.get(
   "/google",
   passport.authenticate("google", { scope: ["profile", "email"] }),
+);
+
+authRouter.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "/login",
+    session: false,
+  }),
+  authController.googleCallback
 );
 
 export default authRouter;

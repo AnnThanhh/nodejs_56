@@ -28,7 +28,8 @@ app.use(logAPI()); //middleware để log thông tin request từ client gửi l
 
 initLoginGooglePassport(); //khởi tạo passport login google
 
-// console.log("đây là app", app)
+app.use(express.static("public")) //middleware để cho phép FE truy cập vào các file tĩnh trong thư mục gốc của project
+
 //url: localhost:3069/api/article
 app.use("/api", appLimit, rootRouter);
 app.use(appError);

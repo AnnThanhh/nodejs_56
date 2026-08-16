@@ -995,7 +995,7 @@ export const ArticlesScalarFieldEnum = {
   id: 'id',
   title: 'title',
   content: 'content',
-  imageURL: 'imageURL',
+  imageUrl: 'imageUrl',
   views: 'views',
   userId: 'userId',
   deletedBy: 'deletedBy',
@@ -1100,7 +1100,7 @@ export const UsersScalarFieldEnum = {
   id: 'id',
   email: 'email',
   fullName: 'fullName',
-  avartar: 'avartar',
+  avatar: 'avatar',
   age: 'age',
   totpSecret: 'totpSecret',
   googleId: 'googleId',
@@ -1134,7 +1134,7 @@ export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 export const ArticlesOrderByRelevanceFieldEnum = {
   title: 'title',
   content: 'content',
-  imageURL: 'imageURL'
+  imageUrl: 'imageUrl'
 } as const
 
 export type ArticlesOrderByRelevanceFieldEnum = (typeof ArticlesOrderByRelevanceFieldEnum)[keyof typeof ArticlesOrderByRelevanceFieldEnum]
@@ -1174,7 +1174,7 @@ export type FoodsOrderByRelevanceFieldEnum = (typeof FoodsOrderByRelevanceFieldE
 export const UsersOrderByRelevanceFieldEnum = {
   email: 'email',
   fullName: 'fullName',
-  avartar: 'avartar',
+  avatar: 'avatar',
   totpSecret: 'totpSecret',
   googleId: 'googleId',
   password: 'password'
