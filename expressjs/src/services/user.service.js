@@ -72,7 +72,7 @@ export const userService = {
         avatar: uploadResult.public_id,
       },
     });
-
+    // console.log("upload data", uploadResult.secure_url)
     return uploadResult.secure_url;
   },
 };

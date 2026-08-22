@@ -6,6 +6,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { appLimit } from "./src/common/middlewares/rateLimit.middleware.js";
 import { initLoginGooglePassport } from "./src/common/passport/login-google.passport.js";
+import swaggerUi from "swagger-ui-express";
+import { swaggerDocument } from "./src/common/swagger/init.swagger.js";
 const app = express();
 
 // app.use((req, res, next) => {
@@ -29,6 +31,8 @@ app.use(logAPI()); //middleware để log thông tin request từ client gửi l
 initLoginGooglePassport(); //khởi tạo passport login google
 
 app.use(express.static("public")) //middleware để cho phép FE truy cập vào các file tĩnh trong thư mục gốc của project
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument)); // swagger
 
 //url: localhost:3069/api/article
 app.use("/api", appLimit, rootRouter);
