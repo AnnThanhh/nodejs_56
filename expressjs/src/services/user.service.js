@@ -3,6 +3,7 @@ import { prisma } from "../common/prisma/connect.prisma.js";
 import path from "path";
 import fs from "fs";
 import { v2 as cloudinary } from "cloudinary";
+import { buildQueryPrisma } from "../common/helpers/build-query-prisma.helper.js";
 cloudinary.config({
   secure: false, // true: https, false: http
 });
@@ -74,5 +75,39 @@ export const userService = {
     });
     // console.log("upload data", uploadResult.secure_url)
     return uploadResult.secure_url;
+  },
+
+  async findAll(req) {
+    const { where, page, pageSize, index } = buildQueryPrisma(req);
+
+    const resultPrisma = await prisma.users.findMany({
+      where: where,
+      skip: index, //Offset
+      take: pageSize, //Limit
+    });
+
+    const totalItems = await prisma.users.count({
+      where: where,
+    });
+    const totalPages = Math.ceil(totalItems / pageSize);
+
+    return {
+      items: resultPrisma,
+      totalItems: totalItems,
+      totalPages: totalPages,
+      page: page,
+      pageSize: pageSize,
+    };
+  },
+
+  async findOne(req) {
+    const { userID } = req.params;
+    const resultPrisma = await prisma.users.findUnique({
+      where: {
+        id: Number(userID),
+      },
+    });
+
+    return resultPrisma;
   },
 };

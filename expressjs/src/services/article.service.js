@@ -12,7 +12,7 @@ export const articleService = {
     // return "list article";
     // const resultSequelize = await Article.findAll(); // select id, title from Article -> index
     const { where, page, pageSize, index } = buildQueryPrisma(req);
-    
+
     const resultPrisma = await prisma.articles.findMany({
       where: where,
       skip: index, //Offset
@@ -39,12 +39,24 @@ export const articleService = {
     const result = await prisma.articles.create({
       data: {
         title: body.title,
-        Content: body.content,
+        content: body.content,
         userId: 1,
       },
     });
 
     return true;
+  },
+
+  async findOne(req) {
+    const { articleID } = req.params;
+
+    const result = await prisma.articles.findUnique({
+      where: {
+        id: Number(articleID),
+      },
+    });
+
+    return result;
   },
 
   //PARMS: ID -> ĐỂ DETAIL, UPDATE, DELETEQ
@@ -58,7 +70,7 @@ export const articleService = {
       },
       data: {
         title: body.title,
-        Content: body.content,
+        content: body.content,
       },
     });
 

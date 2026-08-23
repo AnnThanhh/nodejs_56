@@ -35,6 +35,9 @@ articleRouter.get(
 //CREATE
 articleRouter.post("/", articleController.create);
 
+//FINDONE
+articleRouter.get("/:articleID", articleController.findOne);
+
 //UPDATE
 articleRouter.put("/:articleID", articleController.update);
 

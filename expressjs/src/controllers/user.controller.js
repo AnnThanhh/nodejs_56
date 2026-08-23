@@ -19,4 +19,16 @@ export const userController = {
     );
     res.status(response.statusCode).json(response);
   },
+
+  async findAll(req, res, next) {
+    const result = await userService.findAll(req);
+    const response = responseSuccess(result, `Get all users successfully`);
+    res.status(response.statusCode).json(response);
+  },
+
+  async findOne(req, res, next) {
+    const result = await userService.findOne(req);
+    const response = responseSuccess(result, `Get user by id successfully`);
+    res.status(response.statusCode).json(response);
+  },
 };

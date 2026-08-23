@@ -24,6 +24,12 @@ export const articleController = {
     res.status(response.statusCode).json(response);
   },
 
+  async findOne(req, res) {
+    const result = await articleService.findOne(req);
+    const response = responseSuccess(result, "Lấy bài viết thành công");
+    res.status(response.statusCode).json(response);
+  },
+
   async update(req, res) {
     const result = await articleService.update(req);
     const response = responseSuccess(result, "Cập nhật bài viết thành công");
