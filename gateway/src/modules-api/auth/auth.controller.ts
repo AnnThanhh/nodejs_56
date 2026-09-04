@@ -5,7 +5,6 @@ import { LoginDto } from './dto/login.dto';
 import type { Response } from 'express';
 import { Public } from 'src/common/decorators/public.decorator';
 import { User } from 'src/common/decorators/user.decorator';
-import { Role } from 'src/common/decorators/role.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -28,7 +27,6 @@ export class AuthController {
   }
 
   @Get('get-info')
-  @Role("ADMIN")
   async getInfo(@User() user) {
     return user;
   }

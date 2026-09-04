@@ -79,3 +79,23 @@ export type Orders = Prisma.OrdersModel
  * 
  */
 export type Users = Prisma.UsersModel
+/**
+ * Model ChatMessageReceipts
+ * 
+ */
+export type ChatMessageReceipts = Prisma.ChatMessageReceiptsModel
+/**
+ * Model Roles
+ * 
+ */
+export type Roles = Prisma.RolesModel
+/**
+ * Model Permissions
+ * 
+ */
+export type Permissions = Prisma.PermissionsModel
+/**
+ * Model RolePermissions
+ * 
+ */
+export type RolePermissions = Prisma.RolePermissionsModel

@@ -58,7 +58,11 @@ export const ModelName = {
   ChatMessages: 'ChatMessages',
   Foods: 'Foods',
   Orders: 'Orders',
-  Users: 'Users'
+  Users: 'Users',
+  ChatMessageReceipts: 'ChatMessageReceipts',
+  Roles: 'Roles',
+  Permissions: 'Permissions',
+  RolePermissions: 'RolePermissions'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -148,7 +152,8 @@ export const ChatMessagesScalarFieldEnum = {
   isDeleted: 'isDeleted',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  isEdited: 'isEdited'
 } as const
 
 export type ChatMessagesScalarFieldEnum = (typeof ChatMessagesScalarFieldEnum)[keyof typeof ChatMessagesScalarFieldEnum]
@@ -190,15 +195,64 @@ export const UsersScalarFieldEnum = {
   age: 'age',
   totpSecret: 'totpSecret',
   googleId: 'googleId',
+  roleId: 'roleId',
   deletedBy: 'deletedBy',
   isDeleted: 'isDeleted',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  password: 'password'
+  password: 'password',
+  lastActiveAt: 'lastActiveAt'
 } as const
 
 export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
+
+
+export const ChatMessageReceiptsScalarFieldEnum = {
+  id: 'id',
+  chatMessageId: 'chatMessageId',
+  chatGroupId: 'chatGroupId',
+  userId: 'userId',
+  deliveredAt: 'deliveredAt',
+  seenAt: 'seenAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChatMessageReceiptsScalarFieldEnum = (typeof ChatMessageReceiptsScalarFieldEnum)[keyof typeof ChatMessageReceiptsScalarFieldEnum]
+
+
+export const RolesScalarFieldEnum = {
+  id: 'id',
+  nameRole: 'nameRole',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RolesScalarFieldEnum = (typeof RolesScalarFieldEnum)[keyof typeof RolesScalarFieldEnum]
+
+
+export const PermissionsScalarFieldEnum = {
+  id: 'id',
+  method: 'method',
+  url: 'url',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PermissionsScalarFieldEnum = (typeof PermissionsScalarFieldEnum)[keyof typeof PermissionsScalarFieldEnum]
+
+
+export const RolePermissionsScalarFieldEnum = {
+  id: 'id',
+  roleId: 'roleId',
+  permissionId: 'permissionId',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RolePermissionsScalarFieldEnum = (typeof RolePermissionsScalarFieldEnum)[keyof typeof RolePermissionsScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -267,4 +321,19 @@ export const UsersOrderByRelevanceFieldEnum = {
 } as const
 
 export type UsersOrderByRelevanceFieldEnum = (typeof UsersOrderByRelevanceFieldEnum)[keyof typeof UsersOrderByRelevanceFieldEnum]
+
+
+export const RolesOrderByRelevanceFieldEnum = {
+  nameRole: 'nameRole'
+} as const
+
+export type RolesOrderByRelevanceFieldEnum = (typeof RolesOrderByRelevanceFieldEnum)[keyof typeof RolesOrderByRelevanceFieldEnum]
+
+
+export const PermissionsOrderByRelevanceFieldEnum = {
+  method: 'method',
+  url: 'url'
+} as const
+
+export type PermissionsOrderByRelevanceFieldEnum = (typeof PermissionsOrderByRelevanceFieldEnum)[keyof typeof PermissionsOrderByRelevanceFieldEnum]
 

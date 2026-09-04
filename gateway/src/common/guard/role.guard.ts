@@ -3,13 +3,25 @@ import {
   Injectable,
   CanActivate,
   ExecutionContext,
-  BadRequestException,
+  ForbiddenException,
 } from '@nestjs/common';
+import { PATH_METADATA } from '@nestjs/common/constants';
 import { Reflector } from '@nestjs/core';
-import { Observable } from 'rxjs';
 import { PrismaService } from 'src/modules-system/prisma/prisma.service';
 import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
-import { ROLE_KEY } from '../decorators/role.decorator';
+
+// ghép prefix của Controller với path của handler để ra route pattern gốc (không kèm global prefix 'api')
+function buildRoutePath(
+  controllerPath: string | string[],
+  handlerPath: string | string[],
+): string {
+  const parts = [controllerPath, handlerPath]
+    .flat()
+    .map((part) => (part ?? '').toString().replace(/^\/+|\/+$/g, ''))
+    .filter((part) => part.length > 0);
+
+  return '/' + parts.join('/');
+}
 
 @Injectable()
 export class RoleGuard implements CanActivate {
@@ -20,17 +32,42 @@ export class RoleGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const role = this.reflector.getAllAndOverride<string>(ROLE_KEY, [
+    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
       context.getHandler(),
       context.getClass(),
     ]);
+    if (isPublic) {
+      return true;
+    }
 
-    //tìm ra user gọi api, thông qua protect guard
-    //khi có user -> lấy role trong user (role trong db)
-    //role của user (db) === role (decorator)
-    // nếu bằng -> đi vào Controller
-    // nếu không bằng -> throw exception
-    // console.log('roleGuard', { role });
+    const req = context.switchToHttp().getRequest();
+    const user = req.user;
+
+    if (!user?.roleId) {
+      throw new ForbiddenException('Tài khoản chưa được phân quyền');
+    }
+
+    const controllerPath: string | string[] =
+      this.reflector.get(PATH_METADATA, context.getClass()) ?? '';
+    const handlerPath: string | string[] =
+      this.reflector.get(PATH_METADATA, context.getHandler()) ?? '';
+    const url = buildRoutePath(controllerPath, handlerPath);
+
+    // check quyền hoàn toàn trong db: role -> role_permission (isActive) -> permission (method + url)
+    const permission = await this.prisma.rolePermissions.findFirst({
+      where: {
+        roleId: user.roleId,
+        isActive: true,
+        Permissions: {
+          method: req.method,
+          url,
+        },
+      },
+    });
+
+    if (!permission) {
+      throw new ForbiddenException('Bạn không có quyền truy cập chức năng này');
+    }
 
     return true;
   }

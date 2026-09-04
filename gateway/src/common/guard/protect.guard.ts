@@ -47,14 +47,16 @@ export class ProtectGuard implements CanActivate {
         where: {
           id: (decode as any).userId,
         },
+        include: {
+          Roles: true,
+        },
       });
 
       if (!userExits) {
         throw new BadRequestException('User không tồn tại');
       }
 
-      //xử lý phân quyền role nếu có (db) -> phát triển thêm
-
+      // roleId/Roles được lấy kèm user để RoleGuard kiểm tra quyền theo db
       req.user = userExits;
 
       return true;

@@ -8,9 +8,17 @@ import { APP_GUARD } from '@nestjs/core/constants';
 import { TokenModule } from './modules-system/token/token.module';
 import { RoleGuard } from './common/guard/role.guard';
 import { ArticleModule } from './modules-api/article/article.module';
+import { PermissionModule } from './modules-api/permission/permission.module';
 
 @Module({
-  imports: [AuthModule, PrismaModule, TokenModule, ArticleModule],
+  imports: [
+    AuthModule,
+    PrismaModule,
+    TokenModule,
+    ArticleModule,
+    PermissionModule,
+  ],
+
   controllers: [AppController],
   providers: [
     AppService,
