@@ -59,36 +59,58 @@ model ChatGroupMembers {
 }
 
 model ChatGroups {
-  id               Int                @id @default(autoincrement())
-  name             String?            @db.VarChar(255)
-  ownerId          Int?
-  deletedBy        Int                @default(0)
-  isDeleted        Boolean            @default(false)
-  deletedAt        DateTime?          @db.Timestamp(0)
-  createdAt        DateTime           @default(now()) @db.Timestamp(0)
-  updatedAt        DateTime           @default(now()) @db.Timestamp(0)
-  ChatGroupMembers ChatGroupMembers[]
-  Users            Users?             @relation(fields: [ownerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ChatGroups_ibfk_1")
-  ChatMessages     ChatMessages[]
+  id                  Int                   @id @default(autoincrement())
+  name                String?               @db.VarChar(255)
+  ownerId             Int?
+  deletedBy           Int                   @default(0)
+  isDeleted           Boolean               @default(false)
+  deletedAt           DateTime?             @db.Timestamp(0)
+  createdAt           DateTime              @default(now()) @db.Timestamp(0)
+  updatedAt           DateTime              @default(now()) @db.Timestamp(0)
+  ChatGroupMembers    ChatGroupMembers[]
+  Users               Users?                @relation(fields: [ownerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ChatGroups_ibfk_1")
+  ChatMessages        ChatMessages[]
+  ChatMessageReceipts ChatMessageReceipts[]
 
   @@index([ownerId], map: "ownerId")
 }
 
 model ChatMessages {
-  id           Int         @id @default(autoincrement())
-  chatGroupId  Int?
-  userIdSender Int?
-  messageText  String?     @db.Text
-  deletedBy    Int         @default(0)
-  isDeleted    Boolean     @default(false)
-  deletedAt    DateTime?   @db.Timestamp(0)
-  createdAt    DateTime    @default(now()) @db.Timestamp(0)
-  updatedAt    DateTime    @default(now()) @db.Timestamp(0)
-  ChatGroups   ChatGroups? @relation(fields: [chatGroupId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ChatMessages_ibfk_1")
-  Users        Users?      @relation(fields: [userIdSender], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ChatMessages_ibfk_2")
+  id                  Int                   @id @default(autoincrement())
+  chatGroupId         Int?
+  userIdSender        Int?
+  messageText         String?               @db.Text
+  isEdited            Boolean               @default(false)
+  deletedBy           Int                   @default(0)
+  isDeleted           Boolean               @default(false)
+  deletedAt           DateTime?             @db.Timestamp(0)
+  createdAt           DateTime              @default(now()) @db.Timestamp(0)
+  updatedAt           DateTime              @default(now()) @db.Timestamp(0)
+  ChatGroups          ChatGroups?           @relation(fields: [chatGroupId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ChatMessages_ibfk_1")
+  Users               Users?                @relation(fields: [userIdSender], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ChatMessages_ibfk_2")
+  ChatMessageReceipts ChatMessageReceipts[]
 
   @@index([chatGroupId], map: "chatGroupId")
   @@index([userIdSender], map: "userIdSender")
+}
+
+// theo dõi trạng thái đã nhận (delivered) / đã xem (seen) của từng thành viên đối với từng tin nhắn
+model ChatMessageReceipts {
+  id            Int          @id @default(autoincrement())
+  chatMessageId Int
+  chatGroupId   Int
+  userId        Int
+  deliveredAt   DateTime?    @db.Timestamp(0)
+  seenAt        DateTime?    @db.Timestamp(0)
+  createdAt     DateTime     @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime     @default(now()) @db.Timestamp(0)
+  ChatMessages  ChatMessages @relation(fields: [chatMessageId], references: [id], onDelete: Cascade)
+  ChatGroups    ChatGroups   @relation(fields: [chatGroupId], references: [id], onDelete: Cascade)
+  Users         Users        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([chatMessageId, userId])
+  @@index([userId, chatGroupId])
+  @@index([chatGroupId])
 }
 
 model Foods {
@@ -127,6 +149,7 @@ model Users {
   age                      Int?
   totpSecret               String?                    @db.VarChar(255)
   googleId                 String?                    @db.VarChar(255)
+  lastActiveAt             DateTime?                  @db.Timestamp(0)
   deletedBy                Int                        @default(0)
   isDeleted                Boolean                    @default(false)
   deletedAt                DateTime?                  @db.Timestamp(0)
@@ -138,5 +161,6 @@ model Users {
   ChatGroupMembers         ChatGroupMembers[]
   ChatGroups               ChatGroups[]
   ChatMessages             ChatMessages[]
+  ChatMessageReceipts      ChatMessageReceipts[]
   Orders                   Orders[]
 }

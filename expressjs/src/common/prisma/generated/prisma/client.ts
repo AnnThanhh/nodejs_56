@@ -65,6 +65,11 @@ export type ChatGroups = Prisma.ChatGroupsModel
  */
 export type ChatMessages = Prisma.ChatMessagesModel
 /**
+ * Model ChatMessageReceipts
+ * 
+ */
+export type ChatMessageReceipts = Prisma.ChatMessageReceiptsModel
+/**
  * Model Foods
  * 
  */

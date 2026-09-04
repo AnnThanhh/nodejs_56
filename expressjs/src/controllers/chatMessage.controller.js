@@ -43,4 +43,13 @@ export const chatMessageController = {
     );
     res.status(response.statusCode).json(response);
   },
+
+  async markSeen(req, res, next) {
+    const result = await chatMessageService.markSeen({
+      chatGroupId: req.body.chatGroupId,
+      userId: req.user.id,
+    });
+    const response = responseSuccess(result, `Mark seen successfully`);
+    res.status(response.statusCode).json(response);
+  },
 };

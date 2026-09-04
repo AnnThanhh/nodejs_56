@@ -56,6 +56,7 @@ export const ModelName = {
   ChatGroupMembers: 'ChatGroupMembers',
   ChatGroups: 'ChatGroups',
   ChatMessages: 'ChatMessages',
+  ChatMessageReceipts: 'ChatMessageReceipts',
   Foods: 'Foods',
   Orders: 'Orders',
   Users: 'Users'
@@ -144,6 +145,7 @@ export const ChatMessagesScalarFieldEnum = {
   chatGroupId: 'chatGroupId',
   userIdSender: 'userIdSender',
   messageText: 'messageText',
+  isEdited: 'isEdited',
   deletedBy: 'deletedBy',
   isDeleted: 'isDeleted',
   deletedAt: 'deletedAt',
@@ -152,6 +154,20 @@ export const ChatMessagesScalarFieldEnum = {
 } as const
 
 export type ChatMessagesScalarFieldEnum = (typeof ChatMessagesScalarFieldEnum)[keyof typeof ChatMessagesScalarFieldEnum]
+
+
+export const ChatMessageReceiptsScalarFieldEnum = {
+  id: 'id',
+  chatMessageId: 'chatMessageId',
+  chatGroupId: 'chatGroupId',
+  userId: 'userId',
+  deliveredAt: 'deliveredAt',
+  seenAt: 'seenAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChatMessageReceiptsScalarFieldEnum = (typeof ChatMessageReceiptsScalarFieldEnum)[keyof typeof ChatMessageReceiptsScalarFieldEnum]
 
 
 export const FoodsScalarFieldEnum = {
@@ -190,6 +206,7 @@ export const UsersScalarFieldEnum = {
   age: 'age',
   totpSecret: 'totpSecret',
   googleId: 'googleId',
+  lastActiveAt: 'lastActiveAt',
   deletedBy: 'deletedBy',
   isDeleted: 'isDeleted',
   deletedAt: 'deletedAt',

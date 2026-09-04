@@ -402,6 +402,7 @@ export const ModelName = {
   ChatGroupMembers: 'ChatGroupMembers',
   ChatGroups: 'ChatGroups',
   ChatMessages: 'ChatMessages',
+  ChatMessageReceipts: 'ChatMessageReceipts',
   Foods: 'Foods',
   Orders: 'Orders',
   Users: 'Users'
@@ -420,7 +421,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "articles" | "articles_demo_code_first" | "chatGroupMembers" | "chatGroups" | "chatMessages" | "foods" | "orders" | "users"
+    modelProps: "articles" | "articles_demo_code_first" | "chatGroupMembers" | "chatGroups" | "chatMessages" | "chatMessageReceipts" | "foods" | "orders" | "users"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -754,6 +755,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ChatMessageReceipts: {
+      payload: Prisma.$ChatMessageReceiptsPayload<ExtArgs>
+      fields: Prisma.ChatMessageReceiptsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChatMessageReceiptsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessageReceiptsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChatMessageReceiptsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessageReceiptsPayload>
+        }
+        findFirst: {
+          args: Prisma.ChatMessageReceiptsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessageReceiptsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChatMessageReceiptsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessageReceiptsPayload>
+        }
+        findMany: {
+          args: Prisma.ChatMessageReceiptsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessageReceiptsPayload>[]
+        }
+        create: {
+          args: Prisma.ChatMessageReceiptsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessageReceiptsPayload>
+        }
+        createMany: {
+          args: Prisma.ChatMessageReceiptsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.ChatMessageReceiptsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessageReceiptsPayload>
+        }
+        update: {
+          args: Prisma.ChatMessageReceiptsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessageReceiptsPayload>
+        }
+        deleteMany: {
+          args: Prisma.ChatMessageReceiptsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChatMessageReceiptsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.ChatMessageReceiptsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatMessageReceiptsPayload>
+        }
+        aggregate: {
+          args: Prisma.ChatMessageReceiptsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChatMessageReceipts>
+        }
+        groupBy: {
+          args: Prisma.ChatMessageReceiptsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChatMessageReceiptsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChatMessageReceiptsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChatMessageReceiptsCountAggregateOutputType> | number
+        }
+      }
+    }
     Foods: {
       payload: Prisma.$FoodsPayload<ExtArgs>
       fields: Prisma.FoodsFieldRefs
@@ -1058,6 +1125,7 @@ export const ChatMessagesScalarFieldEnum = {
   chatGroupId: 'chatGroupId',
   userIdSender: 'userIdSender',
   messageText: 'messageText',
+  isEdited: 'isEdited',
   deletedBy: 'deletedBy',
   isDeleted: 'isDeleted',
   deletedAt: 'deletedAt',
@@ -1066,6 +1134,20 @@ export const ChatMessagesScalarFieldEnum = {
 } as const
 
 export type ChatMessagesScalarFieldEnum = (typeof ChatMessagesScalarFieldEnum)[keyof typeof ChatMessagesScalarFieldEnum]
+
+
+export const ChatMessageReceiptsScalarFieldEnum = {
+  id: 'id',
+  chatMessageId: 'chatMessageId',
+  chatGroupId: 'chatGroupId',
+  userId: 'userId',
+  deliveredAt: 'deliveredAt',
+  seenAt: 'seenAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChatMessageReceiptsScalarFieldEnum = (typeof ChatMessageReceiptsScalarFieldEnum)[keyof typeof ChatMessageReceiptsScalarFieldEnum]
 
 
 export const FoodsScalarFieldEnum = {
@@ -1104,6 +1186,7 @@ export const UsersScalarFieldEnum = {
   age: 'age',
   totpSecret: 'totpSecret',
   googleId: 'googleId',
+  lastActiveAt: 'lastActiveAt',
   deletedBy: 'deletedBy',
   isDeleted: 'isDeleted',
   deletedAt: 'deletedAt',
@@ -1379,6 +1462,7 @@ export type GlobalOmitConfig = {
   chatGroupMembers?: Prisma.ChatGroupMembersOmit
   chatGroups?: Prisma.ChatGroupsOmit
   chatMessages?: Prisma.ChatMessagesOmit
+  chatMessageReceipts?: Prisma.ChatMessageReceiptsOmit
   foods?: Prisma.FoodsOmit
   orders?: Prisma.OrdersOmit
   users?: Prisma.UsersOmit
