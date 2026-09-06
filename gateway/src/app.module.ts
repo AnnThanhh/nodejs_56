@@ -15,6 +15,10 @@ import { ResponseSuccessInterceptor } from './common/interceptors/response.inter
 import { CacheModule } from '@nestjs/cache-manager';
 import KeyvRedis from '@keyv/redis';
 import { REDIS_URL } from './common/constant/app.constant';
+import { ElasticSearchModule } from './modules-system/elastic-search/elastic-search.module';
+import { ElasticsearchService } from '@nestjs/elasticsearch';
+import { SearchAppModule } from './modules-api/search-app/search-app.module';
+import { TotpModule } from './modules-api/totp/totp.module';
 
 @Module({
   imports: [
@@ -26,6 +30,9 @@ import { REDIS_URL } from './common/constant/app.constant';
       isGlobal: true,
       stores: [new KeyvRedis(REDIS_URL)],
     }),
+    ElasticSearchModule,
+    SearchAppModule,
+    TotpModule,
   ],
   controllers: [AppController],
   providers: [
@@ -49,13 +56,29 @@ import { REDIS_URL } from './common/constant/app.constant';
   ],
 })
 export class AppModule {
-  constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
+  constructor(
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    private readonly elasticsearchService: ElasticsearchService,
+  ) {}
 
   async onModuleInit() {
     try {
       await this.cacheManager.get('healthcheck');
       console.log('✅ [REDIS] Connection has been established successfully.');
     } catch (error) {
-      console.error('❌ [REDIS] Unable to connect to the cache:', error); }
+      console.error('❌ [REDIS] Unable to connect to the cache:', error);
+    }
+
+    try {
+      await this.elasticsearchService.ping();
+      console.log(
+        '✅ [ELASTICSEARCH] Connection has been established successfully.',
+      );
+    } catch (error) {
+      console.error(
+        '❌ [ELASTICSEARCH] Unable to connect to Elasticsearch:',
+        error,
+      );
+    }
   }
 }

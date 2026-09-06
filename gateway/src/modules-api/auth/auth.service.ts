@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
+import type { Request } from 'express';
 import { LoginDto } from './dto/login.dto';
 import { PrismaService } from 'src/modules-system/prisma/prisma.service';
 import { TokenService } from 'src/modules-system/token/token.service';
@@ -47,5 +52,44 @@ export class AuthService {
 
     const refreshToken = this.tokenService.createRefreshToken(userExit.id);
     return { accessToken: accessToken, refreshToken: refreshToken };
+  }
+
+  async refreshToken(req: Request) {
+    const { accessToken, refreshToken } = req.cookies;
+
+    if (!accessToken || !refreshToken) {
+      throw new BadRequestException('Vui lòng đăng nhập để tiếp tục');
+    }
+
+    const decodeAccessToken: any = this.tokenService.verifyAccessToken(
+      accessToken,
+      {
+        ignoreExpiration: true, //bỏ qua thời gian hết hạn
+      },
+    );
+
+    const decodeRefreshToken: any =
+      this.tokenService.verifyRefreshToken(refreshToken);
+
+    if (decodeAccessToken.userId !== decodeRefreshToken.userId) {
+      throw new UnauthorizedException('Token không hợp lệ');
+    }
+
+    const userExist = await this.prisma.users.findUnique({
+      where: {
+        id: decodeAccessToken.userId,
+      },
+    });
+
+    if (!userExist) {
+      throw new UnauthorizedException('Người dùng không tồn tại');
+    }
+
+    const newAccessToken = this.tokenService.createAccessToken(userExist.id);
+
+    return {
+      accessToken: newAccessToken,
+      refreshToken: refreshToken,
+    };
   }
 }
