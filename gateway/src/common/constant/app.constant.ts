@@ -12,6 +12,10 @@ export const ELASTICSEARCH_NODE = process.env.ELASTICSEARCH_NODE;
 export const ELASTICSEARCH_USERNAME = process.env.ELASTICSEARCH_USERNAME;
 export const ELASTICSEARCH_PASSWORD = process.env.ELASTICSEARCH_PASSWORD;
 
+export const PORT = process.env.PORT;
+
+export const RABBITMQ_URL = process.env.RABBITMQ_URL;
+
 console.log(
   '\n',
   {
@@ -24,6 +28,8 @@ console.log(
     'ELASTICSEARCH_NODE:': ELASTICSEARCH_NODE,
     'ELASTICSEARCH_USERNAME:': ELASTICSEARCH_USERNAME,
     'ELASTICSEARCH_PASSWORD:': ELASTICSEARCH_PASSWORD,
+    'PORT:': PORT,
+    'RABBITMQ_URL:': RABBITMQ_URL,
   },
   '\n',
 );

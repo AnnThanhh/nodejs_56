@@ -4,6 +4,7 @@ import { Users } from 'src/modules-system/prisma/generated/prisma/browser';
 import * as qrcode from 'qrcode';
 import { SaveTotpDto } from './dto/save-totp.dto';
 import { PrismaService } from 'src/modules-system/prisma/prisma.service';
+import { DisableTotpDto } from './dto/disable-totp.dto';
 @Injectable()
 export class TotpService {
   public totp: TOTP;
@@ -55,6 +56,31 @@ export class TotpService {
       },
       data: {
         totpSecret: body.secret,
+      },
+    });
+
+    return true;
+  }
+
+  async disable(user: Users, body: DisableTotpDto) {
+    if (!user.totpSecret) {
+      throw new BadRequestException('Người dùng chưa bật TOTP');
+    }
+    const { valid } = await this.totp.verify(body.token, {
+      secret: user.totpSecret,
+    });
+    console.log(valid);
+
+    if (!valid) {
+      throw new BadRequestException('Mã TOTP không hợp lệ');
+    }
+
+    await this.prisma.users.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        totpSecret: null,
       },
     });
 

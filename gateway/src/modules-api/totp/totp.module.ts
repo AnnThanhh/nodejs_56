@@ -5,5 +5,6 @@ import { TotpController } from './totp.controller';
 @Module({
   controllers: [TotpController],
   providers: [TotpService],
+  exports: [TotpService],
 })
 export class TotpModule {}

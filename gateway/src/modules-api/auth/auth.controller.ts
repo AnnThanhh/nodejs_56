@@ -22,8 +22,13 @@ export class AuthController {
     res: Response,
   ) {
     const result = await this.authService.login(body);
-    res.cookie('accessToken', result.accessToken);
-    res.cookie('refreshToken', result.refreshToken);
+    
+    if (result.isTotp) {
+      return { isTotp: true };
+    } else {
+      res.cookie('accessToken', result.accessToken);
+      res.cookie('refreshToken', result.refreshToken);
+    }
     return true;
   }
 

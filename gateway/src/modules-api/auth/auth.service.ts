@@ -8,15 +8,17 @@ import { LoginDto } from './dto/login.dto';
 import { PrismaService } from 'src/modules-system/prisma/prisma.service';
 import { TokenService } from 'src/modules-system/token/token.service';
 import * as bcrypt from 'bcrypt';
+import { TotpService } from '../totp/totp.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private prisma: PrismaService,
     private tokenService: TokenService,
+    private totpService: TotpService,
   ) {}
   async login(body: LoginDto) {
-    const { email, password } = body;
+    const { email, password, token } = body;
     //kiểm tra email đã được đăng ký chưa
     const userExit = await this.prisma.users.findUnique({
       where: {
@@ -37,6 +39,25 @@ export class AuthService {
     // if (!userExit.password) {
     //   throw new BadRequestException('Vui lòng nhập mật khẩu.');
     // }
+
+    //kiểm tra totp
+    if (userExit.totpSecret) {
+      if (token) {
+        //lần gọi api thứ 2
+        const { valid } = await this.totpService.totp.verify(token, {
+          secret: userExit.totpSecret,
+        });
+
+        if (!valid) {
+          throw new BadRequestException(
+            'Mã xác thực không hợp lệ. Vui lòng thử lại.',
+          );
+        }
+      } else {
+        //lần đầu tiên gọi api
+        return { isTotp: true };
+      }
+    }
 
     //đã đăng ký -> xử lý logic đăng nhập
     const isPasswordValid = bcrypt.compareSync(password, userExit.password); //true
