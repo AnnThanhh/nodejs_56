@@ -1,0 +1,202 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../../orders/src/modules-systems/prisma/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Articles {
+  id        Int       @id @default(autoincrement())
+  title     String?   @db.VarChar(255)
+  content   String?   @db.Text
+  imageUrl  String?   @db.VarChar(255)
+  views     Int       @default(0)
+  userId    Int?
+  deletedBy Int       @default(0)
+  isDeleted Boolean   @default(false)
+  deletedAt DateTime? @db.Timestamp(0)
+  createdAt DateTime  @default(now()) @db.Timestamp(0)
+  updatedAt DateTime  @default(now()) @db.Timestamp(0)
+  Users     Users?    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Articles_ibfk_1")
+
+  @@index([userId], map: "userId")
+}
+
+model Articles_demo_code_first {
+  id        Int       @id @default(autoincrement())
+  title     String    @db.VarChar(255)
+  Content   String?   @db.Text
+  imageURL  String?   @db.VarChar(255)
+  views     Int       @default(0)
+  userId    Int
+  deletedBy Int       @default(0)
+  isDeleted Boolean   @default(false)
+  deletedAt DateTime? @db.Timestamp(0)
+  createdAt DateTime  @default(now()) @db.Timestamp(0)
+  updatedAt DateTime  @default(now()) @db.Timestamp(0)
+  Users     Users     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Articles_demo_code_first_ibfk_1")
+
+  @@index([userId], map: "userId")
+}
+
+model ChatGroupMembers {
+  id          Int         @id @default(autoincrement())
+  userId      Int?
+  chatGroupId Int?
+  deletedBy   Int         @default(0)
+  isDeleted   Boolean     @default(false)
+  deletedAt   DateTime?   @db.Timestamp(0)
+  createdAt   DateTime    @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime    @default(now()) @db.Timestamp(0)
+  Users       Users?      @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ChatGroupMembers_ibfk_1")
+  ChatGroups  ChatGroups? @relation(fields: [chatGroupId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ChatGroupMembers_ibfk_2")
+
+  @@index([chatGroupId], map: "chatGroupId")
+  @@index([userId], map: "userId")
+}
+
+model ChatGroups {
+  id                  Int                   @id @default(autoincrement())
+  name                String?               @db.VarChar(255)
+  ownerId             Int?
+  deletedBy           Int                   @default(0)
+  isDeleted           Boolean               @default(false)
+  deletedAt           DateTime?             @db.Timestamp(0)
+  createdAt           DateTime              @default(now()) @db.Timestamp(0)
+  updatedAt           DateTime              @default(now()) @db.Timestamp(0)
+  ChatGroupMembers    ChatGroupMembers[]
+  Users               Users?                @relation(fields: [ownerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ChatGroups_ibfk_1")
+  ChatMessageReceipts ChatMessageReceipts[]
+  ChatMessages        ChatMessages[]
+
+  @@index([ownerId], map: "ownerId")
+}
+
+model ChatMessageReceipts {
+  id            Int          @id @default(autoincrement())
+  chatMessageId Int
+  chatGroupId   Int
+  userId        Int
+  deliveredAt   DateTime?    @db.Timestamp(0)
+  seenAt        DateTime?    @db.Timestamp(0)
+  createdAt     DateTime     @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime     @default(now()) @db.Timestamp(0)
+  ChatGroups    ChatGroups   @relation(fields: [chatGroupId], references: [id], onDelete: Cascade)
+  ChatMessages  ChatMessages @relation(fields: [chatMessageId], references: [id], onDelete: Cascade)
+  Users         Users        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([chatMessageId, userId])
+  @@index([chatGroupId])
+  @@index([userId, chatGroupId])
+}
+
+model ChatMessages {
+  id                  Int                   @id @default(autoincrement())
+  chatGroupId         Int?
+  userIdSender        Int?
+  messageText         String?               @db.Text
+  deletedBy           Int                   @default(0)
+  isDeleted           Boolean               @default(false)
+  deletedAt           DateTime?             @db.Timestamp(0)
+  createdAt           DateTime              @default(now()) @db.Timestamp(0)
+  updatedAt           DateTime              @default(now()) @db.Timestamp(0)
+  isEdited            Boolean               @default(false)
+  ChatMessageReceipts ChatMessageReceipts[]
+  ChatGroups          ChatGroups?           @relation(fields: [chatGroupId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ChatMessages_ibfk_1")
+  Users               Users?                @relation(fields: [userIdSender], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ChatMessages_ibfk_2")
+
+  @@index([chatGroupId], map: "chatGroupId")
+  @@index([userIdSender], map: "userIdSender")
+}
+
+model Foods {
+  id          Int       @id @default(autoincrement())
+  name        String?   @db.VarChar(255)
+  description String?   @default("Chưa có thông tin") @db.VarChar(255)
+  deletedBy   Int       @default(0)
+  isDeleted   Boolean   @default(false)
+  deletedAt   DateTime? @db.Timestamp(0)
+  createdAt   DateTime  @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime  @default(now()) @db.Timestamp(0)
+  Orders      Orders[]
+}
+
+model Orders {
+  id        Int       @id @default(autoincrement())
+  userId    Int?
+  foodId    Int?
+  deletedBy Int       @default(0)
+  isDeleted Boolean   @default(false)
+  deletedAt DateTime? @db.Timestamp(0)
+  createdAt DateTime  @default(now()) @db.Timestamp(0)
+  updatedAt DateTime  @default(now()) @db.Timestamp(0)
+  Users     Users?    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Orders_ibfk_1")
+  Foods     Foods?    @relation(fields: [foodId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Orders_ibfk_2")
+
+  @@index([foodId], map: "foodId")
+  @@index([userId], map: "userId")
+}
+
+model Permissions {
+  id              Int               @id @default(autoincrement())
+  method          String            @db.VarChar(10)
+  url             String            @db.VarChar(255)
+  createdAt       DateTime          @default(now()) @db.Timestamp(0)
+  updatedAt       DateTime          @default(now()) @db.Timestamp(0)
+  RolePermissions RolePermissions[]
+
+  @@unique([method, url], map: "method_url")
+}
+
+model RolePermissions {
+  id           Int         @id @default(autoincrement())
+  roleId       Int
+  permissionId Int
+  isActive     Boolean     @default(true)
+  createdAt    DateTime    @default(now()) @db.Timestamp(0)
+  updatedAt    DateTime    @default(now()) @db.Timestamp(0)
+  Roles        Roles       @relation(fields: [roleId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "RolePermissions_ibfk_1")
+  Permissions  Permissions @relation(fields: [permissionId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "RolePermissions_ibfk_2")
+
+  @@unique([roleId, permissionId], map: "roleId_permissionId")
+  @@index([permissionId], map: "permissionId")
+}
+
+model Roles {
+  id              Int               @id @default(autoincrement())
+  nameRole        String            @unique(map: "nameRole") @db.VarChar(100)
+  createdAt       DateTime          @default(now()) @db.Timestamp(0)
+  updatedAt       DateTime          @default(now()) @db.Timestamp(0)
+  RolePermissions RolePermissions[]
+  Users           Users[]
+}
+
+model Users {
+  id                       Int                        @id @default(autoincrement())
+  email                    String                     @unique(map: "email") @db.VarChar(255)
+  fullName                 String?                    @db.VarChar(255)
+  avatar                   String?                    @db.Text
+  age                      Int?
+  totpSecret               String?                    @db.VarChar(255)
+  googleId                 String?                    @db.VarChar(255)
+  deletedBy                Int                        @default(0)
+  isDeleted                Boolean                    @default(false)
+  deletedAt                DateTime?                  @db.Timestamp(0)
+  createdAt                DateTime                   @default(now()) @db.Timestamp(0)
+  updatedAt                DateTime                   @default(now()) @db.Timestamp(0)
+  password                 String?                    @db.VarChar(255)
+  lastActiveAt             DateTime?                  @db.Timestamp(0)
+  roleId                   Int?
+  Articles                 Articles[]
+  Articles_demo_code_first Articles_demo_code_first[]
+  ChatGroupMembers         ChatGroupMembers[]
+  ChatGroups               ChatGroups[]
+  ChatMessageReceipts      ChatMessageReceipts[]
+  ChatMessages             ChatMessages[]
+  Orders                   Orders[]
+  Roles                    Roles?                     @relation(fields: [roleId], references: [id], onUpdate: NoAction, map: "Users_ibfk_1")
+
+  @@index([roleId], map: "roleId")
+}
