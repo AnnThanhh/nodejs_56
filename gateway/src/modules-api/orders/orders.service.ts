@@ -15,7 +15,8 @@ export class OrdersService {
 
     //send: gửi message đến RabbitMQ thông qua client đã inject,
     // bọc với lastValueFrom để đảm bảo nhận được kết quả trả về từ microservice.
-
+    // @messagepattern dùng dể nhận tín hiệu khi sử dụng send của client RabbitMQ.
+    console.log(data);
     const result = await lastValueFrom(this.client.send('create_order', data));
 
     return result;

@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
   transport: Transport.RMQ,
   options: {
-    urls: [RABBITMQ_URL],
+    urls: [RABBITMQ_URL!],
     queue: 'orders_queue',
     queueOptions: {
       durable: true
@@ -15,7 +15,7 @@ async function bootstrap() {
      socketOptions: {
             connectionOption: {
               ClientProperties: {
-                connection_name: 'order-on',
+                connection_name: 'order-send',
               },
             },
           },
