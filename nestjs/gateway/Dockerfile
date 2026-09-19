@@ -1,5 +1,5 @@
 #chỉ định base image
-FROM node:24.9.0-alpine
+FROM node:24.9.0-alpine AS BUILD
 
 #chỉ định thư mục hoạt động mặc định /app
 WORKDIR /app
@@ -14,8 +14,18 @@ COPY . .
 
 RUN npm run build
 
+RUN npm prune --production
+
+FROM node:24.9.0-alpine AS PRODUCTION
+
+WORKDIR /app
+
+COPY --from=BUILD ./app/dist ./dist
+COPY --from=BUILD ./app/node_modules ./node_modules
+
 #chỉ định lệnh chạy khi container khởi động
-CMD ["node", "dist/main"]
+CMD ["node", "dist/src/main"]
 
 #run chỉ chạy khi build image
 #cmd chạy khi container khởi động
+

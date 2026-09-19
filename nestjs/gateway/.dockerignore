@@ -5,3 +5,4 @@ Dockerfile
 eslint.config.mjs
 .prettierrc
 README.md
+.env
