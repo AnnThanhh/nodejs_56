@@ -2,7 +2,7 @@ services:
   #docker run --name con-gateway -d -p 3070:3069 img-gateway
   gateway:
     container_name: con-gateway-dc
-    image: img-gateway
+    image: vulebaolong/img-gateway:latest
     ports:
       - '3070:3069'
     env_file:

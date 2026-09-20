@@ -1,5 +1,5 @@
 #chỉ định base image
-FROM node:24.9.0-alpine AS BUILD
+FROM --platform=linux/amd64 node:24.9.0-alpine AS BUILD
 
 #chỉ định thư mục hoạt động mặc định /app
 WORKDIR /app
@@ -16,7 +16,7 @@ RUN npm run build
 
 RUN npm prune --production
 
-FROM node:24.9.0-alpine AS PRODUCTION
+FROM --platform=linux/amd64 node:24.9.0-alpine AS PRODUCTION
 
 WORKDIR /app
 
