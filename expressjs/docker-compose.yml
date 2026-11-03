@@ -1,0 +1,49 @@
+name: nodejs56-express
+
+services:
+  express:
+    build: .
+    init: true
+    ports:
+      - "${APP_PORT:-3069}:3069"
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: mysql://express:${MYSQL_PASSWORD:-express_local_password}@mysql:3306/nodejs_56
+      ACCESS_TOKEN_SECRET_KEY: ${ACCESS_TOKEN_SECRET_KEY:-local-access-token-secret-change-me}
+      REFRESH_TOKEN_SECRET_KEY: ${REFRESH_TOKEN_SECRET_KEY:-local-refresh-token-secret-change-me}
+      # Thay bằng thông tin thật trong .env để sử dụng đăng nhập Google.
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-local-google-client-id}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-local-google-client-secret}
+    volumes:
+      - uploads:/app/public/images
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3069/api-docs/').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+
+  mysql:
+    image: mysql:8.4
+    ports:
+      - "127.0.0.1:${MYSQL_PORT:-3307}:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_local_password}
+      MYSQL_DATABASE: nodejs_56
+      MYSQL_USER: express
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-express_local_password}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=\"$$MYSQL_PASSWORD\" mysql --protocol=TCP -h 127.0.0.1 -u\"$$MYSQL_USER\" \"$$MYSQL_DATABASE\" -e 'SELECT 1' >/dev/null 2>&1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+
+volumes:
+  mysql_data:
+  uploads:

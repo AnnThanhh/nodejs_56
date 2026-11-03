@@ -1,7 +1,8 @@
 import { Sequelize } from "sequelize";
+import { DATABASE_URL } from "../constants/app.constant.js";
 
 //tạo kết nối tới db
-const sequelize = new Sequelize('mysql://root:12345@localhost:3307/nodejs_56')
+const sequelize = new Sequelize(DATABASE_URL)
 
 //kiểm tra kết nối
 try {
