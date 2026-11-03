@@ -9,13 +9,6 @@ export const swaggerDocument = {
   openapi: "3.0.4",
   info: {
     title: "Nodejs56 API",
-    description:
-      "Tài liệu các route HTTP được khai báo trong Express. " +
-      "Đăng nhập bằng POST /auth/login trên cùng origin với trang /api-docs để nhận cookie accessToken và refreshToken. " +
-      "Các API được bảo vệ đọc cookie do trình duyệt quản lý; ô Authorize không tự đặt được header Cookie. " +
-      "Xem [cookie authentication](https://swagger.io/docs/specification/v3_0/authentication/cookie-authentication/). " +
-      "Các endpoint ghi rõ chưa triển khai chỉ trả dữ liệu mẫu. " +
-      "CREATE_ROOM, JOIN_ROOM và SEND_MESSAGE là sự kiện Socket.IO, không phải route HTTP.",
     version: "0.1.0",
   },
   servers: [
