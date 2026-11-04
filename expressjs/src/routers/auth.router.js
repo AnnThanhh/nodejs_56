@@ -9,7 +9,7 @@ const authRouter = express.Router();
 // Tạo route CRUD
 authRouter.post("/register", authController.register);
 authRouter.post("/login", loginLimit, authController.login);
-authRouter.get("/get-info", protect, authController.getInfo);
+authRouter.get("/get-info", protectv2, authController.getInfo);
 authRouter.post("/refresh-token", authController.refreshToken);
 // authRouter.get("/get-info", protectv2, authController.getInfo);
 

@@ -81,7 +81,10 @@ export const authService = {
   },
 
   async refreshToken(req) {
-    const { accessToken, refreshToken } = req.cookies;
+    // const { ,accessToken, refreshToken } = req.cookies;
+    const { refreshToken } = req.cookies;
+    //lấy accessToken từ header Authorization
+    const accessToken = req.headers.authorization?.split(" ")[1];
 
     if (!accessToken || !refreshToken) {
       throw new BadRequestException("Vui lòng đăng nhập để tiếp tục");
@@ -102,7 +105,7 @@ export const authService = {
         id: decodeAccessToken.userId,
       },
     });
-    
+
     if (!userExist) {
       throw new UnauthorizedException("Người dùng không tồn tại");
     }

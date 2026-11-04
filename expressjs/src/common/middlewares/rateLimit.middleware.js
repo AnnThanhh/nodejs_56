@@ -18,7 +18,7 @@ export const appLimit = rateLimit({
 // chỉ có thể login 5 lần trong 10p trên 1 ip
 export const loginLimit = rateLimit({
   windowMs: 10 * 60 * 1000, // 10 minutes
-  max: 5, // giới hạn 5 request trong 10p dựa trên IP
+  max: 10, // giới hạn 5 request trong 10p dựa trên IP
   standardHeaders: "draft-8", // định dạng rate limit header mới
   legacyHeaders: false, // tắt định dạng rate limit header cũ
   handler: () => {

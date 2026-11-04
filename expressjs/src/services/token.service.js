@@ -11,7 +11,7 @@ export const tokenService = {
     }
 
     const accessToken = jwt.sign({ userId: userID }, ACCESS_TOKEN_SECRET_KEY, {
-      expiresIn: "1h",
+      expiresIn: "3h",
     });
 
     return accessToken;

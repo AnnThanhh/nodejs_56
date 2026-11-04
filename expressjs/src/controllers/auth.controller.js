@@ -12,16 +12,13 @@ export const authController = {
     const result = await authService.login(req);
     const response = responseSuccess(true, `Login successfully`);
 
-    res.cookie("accessToken", result.accessToken);
+    // res.cookie("accessToken", result.accessToken);
     res.cookie("refreshToken", result.refreshToken);
 
-    // const responsev2 = responseSuccess(
-    //   result.accessToken,
-    //   `Login successfully`,
-    // );
+    const responsev2 = responseSuccess({ accessToken: result.accessToken }, `Login successfully`);
 
-    res.status(response.statusCode).json(response);
-    // res.status(responsev2.statusCode).json(responsev2);
+    // res.status(response.statusCode).json(response);
+    res.status(responsev2.statusCode).json(responsev2);
   },
 
   async getInfo(req, res, next) {
@@ -34,10 +31,13 @@ export const authController = {
   async refreshToken(req, res, next) {
     const result = await authService.refreshToken(req);
     const response = responseSuccess(true, `Refresh token successfully`);
-    res.cookie("accessToken", result.accessToken);
+    // res.cookie("accessToken", result.accessToken);
     res.cookie("refreshToken", result.refreshToken);
 
-    res.status(response.statusCode).json(response);
+    const responsev2 = responseSuccess({ accessToken: result.accessToken }, `Refresh token successfully`);
+
+    // res.status(response.statusCode).json(response);
+    res.status(responsev2.statusCode).json(responsev2);
   },
 
   async googleCallback(req, res, next) {
