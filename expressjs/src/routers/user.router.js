@@ -4,7 +4,7 @@ import multer from "multer";
 import { uploadDiskStorage } from "../common/multer/disk-storage.multer.js";
 import { protect } from "../common/middlewares/protect.middleware.js";
 import { uploadMemoryStorage } from "../common/multer/memory-storage.multer.js";
-import { protectv2 } from "../common/middlewares/protectv2.middleware";
+import { protectv2 } from "../common/middlewares/protectv2.middleware.js";
 
 const userRouter = express.Router();
 

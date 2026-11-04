@@ -22,6 +22,17 @@ const userSchema = {
 };
 
 export const schemas = {
+  AccessTokenData: {
+    type: "object",
+    required: ["accessToken"],
+    properties: {
+      accessToken: {
+        type: "string",
+        description: "JWT access token, hiện có thời hạn 3 giờ theo token.service.js.",
+        example: "<JWT access token>",
+      },
+    },
+  },
   User: userSchema,
   Article: {
     type: "object",
@@ -77,28 +88,36 @@ export const schemas = {
   },
 };
 
-export const cookieSecurity = [{ accessTokenCookie: [] }];
+export const bearerSecurity = [{ bearerAuth: [] }];
 
 export const securitySchemes = {
-  accessTokenCookie: {
-    type: "apiKey",
-    in: "cookie",
-    name: "accessToken",
+  bearerAuth: {
+    type: "http",
+    scheme: "bearer",
+    bearerFormat: "JWT",
     description:
-      "Cookie JWT nhận từ POST /auth/login hoặc Google callback. Middleware protect đọc req.cookies.accessToken.",
+      "Nhập data.accessToken nhận từ POST /auth/login, không nhập tiền tố Bearer. Swagger UI gửi Authorization: Bearer <token>.",
   },
   refreshTokenCookie: {
     type: "apiKey",
     in: "cookie",
     name: "refreshToken",
-    description: "Cookie JWT cần gửi cùng accessToken khi gọi POST /auth/refresh-token.",
+    description: "Cookie refreshToken cần gửi cùng Authorization: Bearer <accessToken> khi gọi POST /auth/refresh-token.",
   },
 };
 
-export const tokenCookieHeaders = {
+export const refreshCookieHeaders = {
   "Set-Cookie": {
     description:
-      "Server gửi hai header Set-Cookie riêng cho accessToken và refreshToken (Path=/); token không nằm trong JSON response.",
+      "Đặt cookie refreshToken (Path=/). Access token được trả trong data.accessToken của JSON response.",
+    schema: { type: "string", example: "refreshToken=<JWT>; Path=/" },
+  },
+};
+
+export const googleCookieHeaders = {
+  "Set-Cookie": {
+    description:
+      "Chỉ khi Google xác thực thành công, callback đặt hai cookie accessToken và refreshToken (Path=/), rồi redirect; không trả JSON token.",
     schema: { type: "string", example: "accessToken=<JWT>; Path=/" },
   },
 };
@@ -144,13 +163,19 @@ export const errorResponse = (description) => ({
 
 export const commonErrors = {
   429: errorResponse("Vượt giới hạn request: tối đa 100 request / 15 phút / IP cho /api."),
-  500: errorResponse("Lỗi xử lý phía server hoặc truy vấn dữ liệu."),
+  500: {
+    description:
+      "Lỗi xử lý hoặc truy vấn dữ liệu. appError trả JSON; nếu chính middleware lỗi (ví dụ err.code của Prisma không phải HTTP status), Express có thể trả HTML.",
+    content: {
+      "application/json": { schema: schemaRef("ErrorResponse") },
+      "text/html": { schema: { type: "string" } },
+    },
+  },
 };
 
 export const protectedErrors = {
-  400: errorResponse("Thiếu cookie accessToken hoặc user trong token không còn tồn tại."),
-  401: errorResponse("Token không hợp lệ."),
-  403: errorResponse("Token đã hết hạn."),
+  401: errorResponse("Thiếu/sai định dạng Authorization: Bearer <token>, token không hợp lệ hoặc user trong token không tồn tại."),
+  403: errorResponse("Access token đã hết hạn."),
   ...commonErrors,
 };
 

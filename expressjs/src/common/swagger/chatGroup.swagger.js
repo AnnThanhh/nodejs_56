@@ -1,5 +1,5 @@
 import {
-  cookieSecurity,
+  bearerSecurity,
   idParameter,
   paginatedResponse,
   paginationParameters,
@@ -18,7 +18,7 @@ export const chatGroup = {
         "Hiện tại items chỉ lọc theo req.user.id, không áp dụng filters hay isDeleted. " +
         "totalItems/totalPages lại đếm theo filters (mặc định isDeleted=false) trên toàn bộ nhóm, " +
         "không giới hạn theo thành viên nên có thể không khớp với items.",
-      security: cookieSecurity,
+      security: bearerSecurity,
       parameters: paginationParameters(
         { name: "Node" },
         "Riêng endpoint này, filters chỉ ảnh hưởng totalItems/totalPages, không ảnh hưởng items.",
@@ -34,7 +34,7 @@ export const chatGroup = {
       description:
         "Service hiện chỉ trả chuỗi mẫu, không đọc body và không tạo bản ghi. " +
         "Chức năng tạo nhóm thực tế đang nằm trong sự kiện Socket.IO CREATE_ROOM.",
-      security: cookieSecurity,
+      security: bearerSecurity,
       responses: {
         200: successResponse("Create chatGroup successfully", {
           type: "string",
@@ -50,7 +50,7 @@ export const chatGroup = {
       tags: ["ChatGroup"],
       summary: "Lấy nhóm chat theo ID (chưa triển khai).",
       description: "Chỉ trả chuỗi mẫu; chưa đọc hoặc kiểm tra nhóm chat trong database.",
-      security: cookieSecurity,
+      security: bearerSecurity,
       responses: {
         200: successResponse("Get chatGroup #1 successfully", {
           type: "string",
@@ -63,7 +63,7 @@ export const chatGroup = {
       tags: ["ChatGroup"],
       summary: "Cập nhật nhóm chat (chưa triển khai).",
       description: "Chỉ trả chuỗi mẫu; không đọc body và không cập nhật database.",
-      security: cookieSecurity,
+      security: bearerSecurity,
       responses: {
         200: successResponse("Update chatGroup #1 successfully", {
           type: "string",
@@ -76,7 +76,7 @@ export const chatGroup = {
       tags: ["ChatGroup"],
       summary: "Xóa nhóm chat (chưa triển khai).",
       description: "Chỉ trả chuỗi mẫu; không xóa hay cập nhật database.",
-      security: cookieSecurity,
+      security: bearerSecurity,
       responses: {
         200: successResponse("Remove chatGroup #1 successfully", {
           type: "string",

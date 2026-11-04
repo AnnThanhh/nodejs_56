@@ -1,12 +1,13 @@
 import {
   commonErrors,
-  cookieSecurity,
+  bearerSecurity,
   errorResponse,
   jsonBody,
   protectedErrors,
+  googleCookieHeaders,
+  refreshCookieHeaders,
   schemaRef,
   successResponse,
-  tokenCookieHeaders,
 } from "./common.swagger.js";
 
 const credentials = {
@@ -20,17 +21,17 @@ export const auth = {
       tags: ["Auth"],
       summary: "Đăng nhập bằng email và mật khẩu.",
       description:
-        "Trả data=true và đặt hai cookie accessToken, refreshToken. " +
-        "Trình duyệt dùng cookie cho các API được bảo vệ trên cùng origin.",
+        "Trả data.accessToken trong JSON và đặt cookie refreshToken. " +
+        "Dùng access token trong header Authorization: Bearer <token> cho các API được bảo vệ.",
       requestBody: jsonBody(credentials, ["email", "password"]),
       responses: {
         200: {
-          ...successResponse("Login successfully", { type: "boolean", example: true }),
-          headers: tokenCookieHeaders,
+          ...successResponse("Login successfully", schemaRef("AccessTokenData")),
+          headers: refreshCookieHeaders,
         },
         400: errorResponse("Email chưa đăng ký hoặc mật khẩu không chính xác."),
         ...commonErrors,
-        429: errorResponse("Tối đa 5 lần gọi đăng nhập / 10 phút / IP, đồng thời chịu giới hạn chung của /api."),
+        429: errorResponse("Tối đa 10 lần gọi đăng nhập / 10 phút / IP, đồng thời chịu giới hạn chung của /api."),
       },
     },
   },
@@ -38,7 +39,7 @@ export const auth = {
     post: {
       tags: ["Auth"],
       summary: "Đăng ký tài khoản.",
-      description: "Tạo user và trả data=true với HTTP 200. Sau đó gọi /auth/login để nhận cookie.",
+      description: "Tạo user và trả data=true với HTTP 200. Sau đó gọi /auth/login để nhận access token.",
       requestBody: jsonBody(
         {
           ...credentials,
@@ -57,7 +58,7 @@ export const auth = {
     get: {
       tags: ["Auth"],
       summary: "Lấy thông tin người dùng đang đăng nhập.",
-      security: cookieSecurity,
+      security: bearerSecurity,
       responses: {
         200: successResponse("Get info successfully", schemaRef("User")),
         ...protectedErrors,
@@ -69,15 +70,16 @@ export const auth = {
       tags: ["Auth"],
       summary: "Cấp lại access token.",
       description:
-        "Cần cả hai cookie của cùng một user. Access token có thể đã hết hạn nhưng phải có chữ ký hợp lệ; " +
-        "refresh token phải còn hạn. Server cấp accessToken mới và đặt lại refreshToken hiện có, không gia hạn refreshToken.",
-      security: [{ accessTokenCookie: [], refreshTokenCookie: [] }],
+        "Gửi access token qua Authorization: Bearer <token> và refreshToken qua cookie; hai token phải thuộc cùng user. " +
+        "Access token có thể đã hết hạn nhưng phải có chữ ký hợp lệ; refresh token phải còn hạn. " +
+        "Trả data.accessToken mới và đặt lại cookie refreshToken hiện có, không gia hạn refresh token.",
+      security: [{ bearerAuth: [], refreshTokenCookie: [] }],
       responses: {
         200: {
-          ...successResponse("Refresh token successfully", { type: "boolean", example: true }),
-          headers: tokenCookieHeaders,
+          ...successResponse("Refresh token successfully", schemaRef("AccessTokenData")),
+          headers: refreshCookieHeaders,
         },
-        400: errorResponse("Thiếu accessToken hoặc refreshToken."),
+        400: errorResponse("Thiếu access token trong header Authorization hoặc thiếu cookie refreshToken."),
         401: errorResponse("Token sai chữ ký/không hợp lệ, hai token khác user hoặc user không còn tồn tại."),
         403: errorResponse("Refresh token đã hết hạn."),
         ...commonErrors,
@@ -105,7 +107,7 @@ export const auth = {
       tags: ["Auth"],
       summary: "Callback đăng nhập Google.",
       description:
-        "Được Google gọi sau bước xác thực. Khi thành công, server đặt accessToken/refreshToken và " +
+        "Được Google gọi sau bước xác thực. Callback hiện vẫn đặt cả hai cookie accessToken và refreshToken khi thành công, rồi " +
         "chuyển đến http://localhost:3000/login-callback. Passport có failureRedirect=/login khi xác thực thất bại. " +
         "Callback được cấu hình trong code là http://localhost:3069/api/auth/google/callback.",
       parameters: [
@@ -116,7 +118,7 @@ export const auth = {
         302: {
           description: "Chuyển hướng về frontend khi thành công hoặc /login theo xử lý thất bại của Passport.",
           headers: {
-            ...tokenCookieHeaders,
+            ...googleCookieHeaders,
             Location: { schema: { type: "string", example: "http://localhost:3000/login-callback" } },
           },
         },

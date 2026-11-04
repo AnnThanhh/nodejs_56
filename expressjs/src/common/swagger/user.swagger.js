@@ -1,6 +1,6 @@
 import {
   commonErrors,
-  cookieSecurity,
+  bearerSecurity,
   errorResponse,
   idParameter,
   paginatedResponse,
@@ -26,7 +26,7 @@ const avatarBody = {
 
 const avatarErrors = {
   ...protectedErrors,
-  400: errorResponse("Thiếu file avatar, thiếu accessToken hoặc user trong token không tồn tại."),
+  400: errorResponse("Thiếu file ở trường avatar: Vui lòng chọn file để upload."),
 };
 
 export const user = {
@@ -61,7 +61,7 @@ export const user = {
       description:
         "Nhận một file ở trường avatar, lưu trong public/images và cập nhật avatar của user đang đăng nhập. " +
         "data là đường dẫn tương đối images/<filename>, truy cập từ thư mục gốc của server, không có tiền tố /api.",
-      security: cookieSecurity,
+      security: bearerSecurity,
       requestBody: avatarBody,
       responses: {
         200: successResponse("Upload avatar local successfully", {
@@ -79,7 +79,7 @@ export const user = {
       description:
         "Nhận một file ở trường avatar. Lưu public_id vào Users.avatar và trả secure_url trong data. " +
         "Cần cấu hình Cloudinary hợp lệ trong user.service.js.",
-      security: cookieSecurity,
+      security: bearerSecurity,
       requestBody: avatarBody,
       responses: {
         200: successResponse("Upload avatar cloud successfully", {

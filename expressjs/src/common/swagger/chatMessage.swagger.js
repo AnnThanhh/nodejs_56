@@ -1,5 +1,5 @@
 import {
-  cookieSecurity,
+  bearerSecurity,
   idParameter,
   paginatedResponse,
   paginationParameters,
@@ -18,7 +18,7 @@ export const chatMessage = {
         'Dùng filters={"chatGroupId":1} để lấy tin nhắn của một nhóm. ' +
         "Endpoint hiện chỉ kiểm tra đăng nhập, chưa giới hạn theo thành viên nhóm; " +
         "nếu không truyền filters thì truy vấn tin nhắn của mọi nhóm với isDeleted=false.",
-      security: cookieSecurity,
+      security: bearerSecurity,
       parameters: paginationParameters({ chatGroupId: 1 }),
       responses: {
         200: paginatedResponse("Get all chatMessages successfully", schemaRef("ChatMessage")),
@@ -31,7 +31,7 @@ export const chatMessage = {
       description:
         "Service hiện chỉ trả chuỗi mẫu, không đọc body và không lưu tin nhắn. " +
         "Gửi và lưu tin nhắn thực tế đang nằm trong sự kiện Socket.IO SEND_MESSAGE.",
-      security: cookieSecurity,
+      security: bearerSecurity,
       responses: {
         200: successResponse("Create chatMessage successfully", {
           type: "string",
@@ -47,7 +47,7 @@ export const chatMessage = {
       tags: ["ChatMessage"],
       summary: "Lấy tin nhắn theo ID (chưa triển khai).",
       description: "Chỉ trả chuỗi mẫu; chưa đọc hoặc kiểm tra tin nhắn trong database.",
-      security: cookieSecurity,
+      security: bearerSecurity,
       responses: {
         200: successResponse("Get chatMessage #1 successfully", {
           type: "string",
@@ -60,7 +60,7 @@ export const chatMessage = {
       tags: ["ChatMessage"],
       summary: "Cập nhật tin nhắn (chưa triển khai).",
       description: "Chỉ trả chuỗi mẫu; không đọc body và không cập nhật database.",
-      security: cookieSecurity,
+      security: bearerSecurity,
       responses: {
         200: successResponse("Update chatMessage #1 successfully", {
           type: "string",
@@ -73,7 +73,7 @@ export const chatMessage = {
       tags: ["ChatMessage"],
       summary: "Xóa tin nhắn (chưa triển khai).",
       description: "Chỉ trả chuỗi mẫu; không xóa hay cập nhật database.",
-      security: cookieSecurity,
+      security: bearerSecurity,
       responses: {
         200: successResponse("Remove chatMessage #1 successfully", {
           type: "string",

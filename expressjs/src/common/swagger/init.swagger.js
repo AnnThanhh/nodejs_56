@@ -9,6 +9,9 @@ export const swaggerDocument = {
   openapi: "3.0.4",
   info: {
     title: "Nodejs56 API",
+    description:
+      "Đăng nhập bằng POST /auth/login, sao chép data.accessToken vào Authorize → bearerAuth. " +
+      "Swagger UI tự thêm Authorization: Bearer <token> cho các API có biểu tượng khóa.",
     version: "0.1.0",
   },
   servers: [
@@ -23,7 +26,7 @@ export const swaggerDocument = {
   ],
   tags: [
     { name: "Article", description: "Quản lý bài viết" },
-    { name: "Auth", description: "Đăng ký, đăng nhập và cookie xác thực" },
+    { name: "Auth", description: "Đăng ký, đăng nhập và access token" },
     { name: "User", description: "Tra cứu người dùng và cập nhật avatar" },
     { name: "ChatGroup", description: "Nhóm chat của người dùng hiện tại" },
     { name: "ChatMessage", description: "Lịch sử tin nhắn" },
