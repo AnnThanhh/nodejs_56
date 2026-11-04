@@ -4,6 +4,7 @@ import multer from "multer";
 import { uploadDiskStorage } from "../common/multer/disk-storage.multer.js";
 import { protect } from "../common/middlewares/protect.middleware.js";
 import { uploadMemoryStorage } from "../common/multer/memory-storage.multer.js";
+import { protectv2 } from "../common/middlewares/protectv2.middleware";
 
 const userRouter = express.Router();
 
@@ -11,13 +12,13 @@ const userRouter = express.Router();
 // Tạo route CRUD
 userRouter.post(
   "/avatar-local",
-  protect,
+  protectv2,
   uploadDiskStorage.single("avatar"),
   userController.avatarLocal,
 );
 userRouter.post(
   "/avatar-cloud",
-  protect,
+  protectv2,
   uploadMemoryStorage.single("avatar"),
   userController.avatarCloud,
 );

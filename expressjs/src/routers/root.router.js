@@ -5,6 +5,7 @@ import userRouter from "./user.router.js";
 import chatGroupRouter from "./chatGroup.router.js";
 import { protect } from "../common/middlewares/protect.middleware.js";
 import chatMessageRouter from "./chatMessage.router.js";
+import { protectv2 } from "../common/middlewares/protectv2.middleware";
 
 //Router: là 1 đối tượng của express, dùng để quản lý các route
 const rootRouter = express.Router();
@@ -12,6 +13,6 @@ const rootRouter = express.Router();
 rootRouter.use("/article", articleRouter);
 rootRouter.use("/auth", authRouter);
 rootRouter.use("/user", userRouter);
-rootRouter.use("/chat-group", protect, chatGroupRouter);
-rootRouter.use("/chat-message", protect, chatMessageRouter);
+rootRouter.use("/chat-group", protectv2, chatGroupRouter);
+rootRouter.use("/chat-message", protectv2, chatMessageRouter);
 export default rootRouter;
